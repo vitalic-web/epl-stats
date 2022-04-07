@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL, TOKEN } from '@/constants';
 
-const instance = axios.create({
+const apiClient = axios.create({
   baseURL: BASE_URL,
   headers: {
     'content-type': 'application/json',
@@ -9,11 +9,8 @@ const instance = axios.create({
   },
 });
 
-const api = {
-  getTeams: () => instance({
-    method: 'GET',
-    url: '/competitions/2021/teams',
-  }),
+export default {
+  getTeams() {
+    return apiClient.get('/competitions/2021/teams');
+  },
 };
-
-export default api;
