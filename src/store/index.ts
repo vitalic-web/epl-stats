@@ -20,13 +20,16 @@ export default createStore({
     },
   },
   actions: {
-    fetchTeams(context) {
-      context.commit('SET_LOADING_STATUS', 'loading');
-      EventService.getTeams()
-        .then((res) => {
-          context.commit('SET_LOADING_STATUS', 'notLoading');
-          context.commit('SET_TEAMS', res.data.teams);
-        });
+    async fetchTeams({ commit }) {
+      try {
+        commit('SET_LOADING_STATUS', 'loading');
+        const teamsData = await EventService.getTeams();
+        commit('SET_TEAMS', teamsData.data.teams);
+      } catch (error) {
+        console.log('error');
+      } finally {
+        commit('SET_LOADING_STATUS', 'notLoading');
+      }
     },
   },
   modules: {
