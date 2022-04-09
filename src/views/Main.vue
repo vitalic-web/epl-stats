@@ -1,21 +1,9 @@
 <template>
-  <p>{{ name }}</p>
-  <el-button type="primary">getTeams</el-button>
-  <div v-if="isLoading">... is loading</div>
-  <div v-else>{{ teams }}</div>
+  <el-main>
+    <LinkView name="Teams" routeName="teams" />
+  </el-main>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
-
-const name = ref('Main');
-const store = useStore();
-
-const teams = computed(() => store.state.teams);
-const isLoading = computed(() => store.getters.isLoading);
-
-onMounted(() => {
-  store.dispatch('fetchTeams');
-});
+import LinkView from '@/views/LinkView.vue';
 </script>

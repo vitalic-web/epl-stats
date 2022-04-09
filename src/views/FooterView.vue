@@ -1,5 +1,7 @@
 <template>
-  <p>{{ name }}</p>
+  <el-footer>
+    <p style="margin: 0">{{ name }}</p>
+  </el-footer>
 </template>
 
 <script setup lang="ts">
