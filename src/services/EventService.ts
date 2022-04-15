@@ -16,4 +16,7 @@ export default {
   getTeams() {
     return apiClient.get('/competitions/2021/teams');
   },
+  getTable() {
+    return apiClient.get('competitions/2021/standings');
+  },
 };

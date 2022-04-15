@@ -6,6 +6,7 @@ export default createStore({
     loadingStatus: 'notLoading',
     teams: [],
     selectedTeam: null,
+    table: [],
   },
   getters: {
     isLoading(state) {
@@ -21,6 +22,9 @@ export default createStore({
     },
     SET_SELECTED_TEAM(state, team) {
       state.selectedTeam = team;
+    },
+    SET_TABLE(state, teams) {
+      state.table = teams;
     },
   },
   actions: {
@@ -38,6 +42,17 @@ export default createStore({
     getTeamInfo({ commit, state }, teamID: number) {
       const selectedTeam = state.teams.find((team: {id: number}) => team.id === teamID);
       commit('SET_SELECTED_TEAM', selectedTeam);
+    },
+    async fetchTable({ commit }) {
+      try {
+        commit('SET_LOADING_STATUS', 'loading');
+        const tableData = await EventService.getTable();
+        commit('SET_TABLE', tableData.data.standings[0].table);
+      } catch (error) {
+        console.log('error');
+      } finally {
+        commit('SET_LOADING_STATUS', 'notLoading');
+      }
     },
   },
   modules: {

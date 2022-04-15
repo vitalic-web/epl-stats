@@ -9,7 +9,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/teams',
     name: 'teams',
-    component: () => import('../views/TeamsList.vue'),
+    component: () => import('../views/TeamsListView.vue'),
+  },
+  {
+    path: '/table',
+    name: 'table',
+    component: () => import('../views/TableView.vue'),
   },
 ];
 

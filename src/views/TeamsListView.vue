@@ -1,8 +1,5 @@
 <template>
-  <el-link type="primary" href="/">
-    <el-icon class="icon"><arrow-left-bold /></el-icon>
-    Back to main page
-  </el-link>
+  <BackToMainLink />
   <p>{{ selectedTeam ? selectedTeam.name : 'no team selected' }}</p>
   <h3>Teams</h3>
   <el-row v-loading="isLoading">
@@ -36,7 +33,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
-import { ArrowLeftBold } from '@element-plus/icons-vue';
+import BackToMainLink from '@/components/BackToMainLink.vue';
 
 const store = useStore();
 
