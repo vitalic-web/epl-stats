@@ -10,6 +10,19 @@ const routes: Array<RouteRecordRaw> = [
     path: '/teams',
     name: 'teams',
     component: () => import('../views/TeamsListView.vue'),
+    // TODO: fix children routes
+    // children: [
+    //   {
+    //     path: '',
+    //     name: 'team',
+    //     component: import('../views/TeamInfo.vue'),
+    //   },
+    // ],
+  },
+  {
+    path: '/teams/:id',
+    name: 'team',
+    component: import('../views/TeamInfo.vue'),
   },
   {
     path: '/table',

@@ -5,7 +5,7 @@ export default createStore({
   state: {
     loadingStatus: 'notLoading',
     teams: [],
-    selectedTeam: null,
+    selectedTeam: {},
     table: [],
     scorers: [],
   },
@@ -43,9 +43,16 @@ export default createStore({
         commit('SET_LOADING_STATUS', 'notLoading');
       }
     },
-    getTeamInfo({ commit, state }, teamID: number) {
-      const selectedTeam = state.teams.find((team: {id: number}) => team.id === teamID);
-      commit('SET_SELECTED_TEAM', selectedTeam);
+    async fetchTeamInfo({ commit }, teamID: string) {
+      try {
+        commit('SET_LOADING_STATUS', 'loading');
+        const selectedTeam = await EventService.getTeamInfo(teamID);
+        commit('SET_SELECTED_TEAM', selectedTeam.data);
+      } catch (error) {
+        console.log('error');
+      } finally {
+        commit('SET_LOADING_STATUS', 'notLoading');
+      }
     },
     async fetchTable({ commit }) {
       try {

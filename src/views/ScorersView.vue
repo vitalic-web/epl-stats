@@ -1,5 +1,5 @@
 <template>
-  <BackToMainLink />
+  <BackLink url="/" pageName="main" />
   <h3>Scorers</h3>
   <el-table
     v-loading="isLoading"
@@ -44,9 +44,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
-import BackToMainLink from '@/components/BackToMainLink.vue';
+import BackLink from '@/components/BackLink.vue';
 
 const store = useStore();
 
@@ -74,8 +74,5 @@ const tableRowClassName = ({
   return '';
 };
 
-onMounted(() => {
-  store.dispatch('fetchScorers');
-  // console.log(scorers);
-});
+store.dispatch('fetchScorers');
 </script>

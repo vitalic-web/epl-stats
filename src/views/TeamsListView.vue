@@ -1,6 +1,5 @@
 <template>
-  <BackToMainLink />
-  <p>{{ selectedTeam ? selectedTeam.name : 'no team selected' }}</p>
+  <BackToMainLink url="/" pageName="main" />
   <h3>Teams</h3>
   <el-row v-loading="isLoading">
     <el-col
@@ -31,22 +30,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
-import BackToMainLink from '@/components/BackToMainLink.vue';
+import { useRouter } from 'vue-router';
+import BackToMainLink from '@/components/BackLink.vue';
 
 const store = useStore();
+const router = useRouter();
 
 const teams = computed(() => store.state.teams);
 const isLoading = computed(() => store.getters.isLoading);
-const selectedTeam = computed(() => store.state.selectedTeam);
 
-const getTeamInfo = (teamId: number) => store.dispatch('getTeamInfo', teamId);
+const getTeamInfo = (teamId: string) => {
+  router.push({ name: 'team', params: { id: teamId } });
+};
 
-onMounted(() => {
-  store.dispatch('fetchTeams');
-  console.log(teams);
-});
+store.dispatch('fetchTeams');
 </script>
 
 <style lang="scss">
