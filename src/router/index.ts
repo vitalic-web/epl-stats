@@ -16,6 +16,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'table',
     component: () => import('../views/TableView.vue'),
   },
+  {
+    path: '/scorers',
+    name: 'scorers',
+    component: () => import('../views/ScorersView.vue'),
+  },
 ];
 
 const router = createRouter({

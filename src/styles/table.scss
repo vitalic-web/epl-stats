@@ -1,0 +1,21 @@
+.table {
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-club {
+      justify-content: start;
+    }
+    &-points {
+      font-weight: bold;
+      color: #000;
+    }
+  }
+}
+
+.el-table .warning-row {
+  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+}
+.el-table .success-row {
+  --el-table-tr-bg-color: var(--el-color-success-light-9);
+}

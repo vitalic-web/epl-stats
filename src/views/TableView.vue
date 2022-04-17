@@ -1,7 +1,12 @@
 <template>
   <BackToMainLink />
   <h3>Table</h3>
-  <el-table v-loading="isLoading" :data="table" style="width: 100%">
+  <el-table
+    v-loading="isLoading"
+    :data="table"
+    style="width: 100%"
+    :row-class-name="tableRowClassName"
+  >
     <el-table-column label="Position" width="80">
       <template #default="scope">
         <div class="table__cell">
@@ -89,28 +94,39 @@ const isLoading = computed(() => store.getters.isLoading);
 
 const addPlus = (gd: number): string => (String(gd).includes('-') ? String(gd) : `+${gd}`);
 
+interface Club {
+  position: number
+  name: string
+  playedGames: number
+  won: number
+  draw: number
+  lost: number
+  goalsFor: number
+  goalsAgainst: number
+  goalDifference: number
+}
+
+const tableRowClassName = ({
+  row,
+  rowIndex,
+}: {
+  row: Club
+  rowIndex: number
+}) => {
+  if (rowIndex === 0) {
+    return 'success-row';
+  } if (rowIndex === 4) {
+    return 'warning-row';
+  }
+  return '';
+};
+
 onMounted(() => {
   store.dispatch('fetchTable');
-  console.log(table);
 });
 </script>
 
 <style lang="scss">
-.table {
-  &__cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &-club {
-      justify-content: start;
-    }
-    &-points {
-      font-weight: bold;
-      color: #000;
-    }
-  }
-}
-
 .el-table th.el-table__cell>.cell {
   display: flex;
   justify-content: center;

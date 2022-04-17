@@ -19,4 +19,17 @@ export default {
   getTable() {
     return apiClient.get('competitions/2021/standings');
   },
+  getScorers(limit: number) {
+    return apiClient.get(
+      'competitions/2021/scorers',
+      {
+        params: {
+          limit,
+        },
+      },
+    );
+  },
+  getTeamInfo(id: string) {
+    return apiClient.get(`teams/${id}`);
+  },
 };

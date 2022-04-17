@@ -1,8 +1,9 @@
 <template>
   <el-main>
     <div class="main">
-      <PageLink class="main__element" name="Teams" routeName="teams" />
-      <PageLink name="Table" routeName="table" />
+      <PageLink name="Teams" routeName="teams" />
+      <PageLink class="main__element" name="Table" routeName="table" />
+      <PageLink name="Scorers" routeName="scorers" />
     </div>
   </el-main>
 </template>
@@ -15,7 +16,7 @@ import PageLink from '@/components/PageLink.vue';
 .main {
   display: flex;
   &__element {
-    margin-right: 20px;
+    margin: 0 20px;
   }
 }
 </style>
