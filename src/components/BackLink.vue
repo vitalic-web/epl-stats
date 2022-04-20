@@ -6,10 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import { ArrowLeftBold } from '@element-plus/icons-vue';
 
-const props = defineProps({
+defineProps({
   url: String,
   pageName: String,
 });
