@@ -1,18 +1,43 @@
 import { createStore } from 'vuex';
 import EventService from '@/services/EventService';
+import { State } from '@/common/types';
 
-export default createStore({
+export default createStore<State>({
   state: {
     loadingStatus: 'notLoading',
     teams: [],
-    selectedTeam: {},
-    table: [],
+    selectedTeam: {
+      name: '',
+      founded: 0,
+      phone: '',
+      venue: '',
+      clubColors: '',
+      address: '',
+      website: '',
+      squad: {
+        name: '',
+        position: '',
+        dateOfBirth: '',
+        nationality: '',
+      },
+    },
+    table: {
+      season: {
+        startDate: '',
+        endDate: '',
+        currentMatchday: 0,
+      },
+      standings: [],
+    },
     scorers: [],
   },
   getters: {
     isLoading(state) {
       return state.loadingStatus === 'loading';
     },
+    // seasonYears(state) {
+    //   const date = new Date(state.table.season.startDate);
+    // }
   },
   mutations: {
     SET_LOADING_STATUS(state, status) {
@@ -24,8 +49,11 @@ export default createStore({
     SET_SELECTED_TEAM(state, team) {
       state.selectedTeam = team;
     },
-    SET_TABLE(state, table) {
-      state.table = table;
+    SET_TABLE_SEASON(state, season) {
+      state.table.season = season;
+    },
+    SET_TABLE_STANDINGS(state, standings) {
+      state.table.standings = standings;
     },
     SET_SCORERS(state, scorers) {
       state.scorers = scorers;
@@ -58,7 +86,8 @@ export default createStore({
       try {
         commit('SET_LOADING_STATUS', 'loading');
         const tableData = await EventService.getTable();
-        commit('SET_TABLE', tableData.data.standings[0].table);
+        commit('SET_TABLE_SEASON', tableData.data.season);
+        commit('SET_TABLE_STANDINGS', tableData.data.standings[0].table);
       } catch (error) {
         console.log('error');
       } finally {

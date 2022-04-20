@@ -16,7 +16,6 @@
         <div style="padding: 14px">
           <span>{{ team.name }}</span>
           <div class="bottom">
-            <time class="time">{{ currentDate }}</time>
             <el-button
               type="text"
               class="button"

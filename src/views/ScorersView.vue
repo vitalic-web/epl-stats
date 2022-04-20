@@ -47,21 +47,12 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import BackLink from '@/components/BackLink.vue';
+import { Scorer } from '@/common/types';
 
 const store = useStore();
 
 const scorers = computed(() => store.state.scorers);
 const isLoading = computed(() => store.getters.isLoading);
-
-console.log('scorers', scorers);
-
-interface Scorer {
-  rank: number
-  player: string
-  club: string
-  nationality: string
-  stat: number
-}
 
 const tableRowClassName = ({
   row,

@@ -1,9 +1,9 @@
 <template>
   <BackToMainLink url="/" pageName="main" />
-  <h3>Table</h3>
+  <h3>Season: {{ season.startDate }} - {{ season.endDate }}</h3>
   <el-table
     v-loading="isLoading"
-    :data="table"
+    :data="standings"
     style="width: 100%"
     :row-class-name="tableRowClassName"
   >
@@ -86,32 +86,22 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import BackToMainLink from '@/components/BackLink.vue';
+import { StandingInfo } from '@/common/types';
 
 const store = useStore();
 
-const table = computed(() => store.state.table);
+const season = computed(() => store.state.table.season);
+const standings = computed(() => store.state.table.standings);
 const isLoading = computed(() => store.getters.isLoading);
 
 const addPlus = (gd: number): string => (String(gd).includes('-') ? String(gd) : `+${gd}`);
-
-interface Club {
-  position: number
-  name: string
-  playedGames: number
-  won: number
-  draw: number
-  lost: number
-  goalsFor: number
-  goalsAgainst: number
-  goalDifference: number
-}
 
 const tableRowClassName = ({
   row,
   rowIndex,
 }: {
-  row: Club
-  rowIndex: number
+  row: StandingInfo;
+  rowIndex: number;
 }) => {
   if (rowIndex === 0) {
     return 'success-row';
