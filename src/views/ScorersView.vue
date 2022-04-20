@@ -14,17 +14,17 @@
     </el-table-column>
     <el-table-column label="Player">
       <template #default="scope">
-        <div class="table__cell table__cell-club">
-<!--          <el-image-->
-<!--            style="width: 30px; height: 30px" :src="scope.row.team.crestUrl" fit="contain" />-->
+        <div>
           <span>{{ scope.row.player.name }}</span>
         </div>
       </template>
     </el-table-column>
     <el-table-column label="Club">
       <template #default="scope">
-        <div>
-          <span>{{ scope.row.team.name }}</span>
+        <div class="table__cell table__cell-club">
+          <el-image
+            style="width: 30px; height: 30px" :src="scope.row.team.crestUrl" fit="contain" />
+          <span class="scorer__team-name">{{ scope.row.team.name }}</span>
         </div>
       </template>
     </el-table-column>
@@ -53,6 +53,8 @@ const store = useStore();
 const scorers = computed(() => store.state.scorers);
 const isLoading = computed(() => store.getters.isLoading);
 
+console.log('scorers', scorers);
+
 interface Scorer {
   rank: number
   player: string
@@ -76,3 +78,9 @@ const tableRowClassName = ({
 
 store.dispatch('fetchScorers');
 </script>
+
+<style lang="scss">
+.scorer__team-name {
+  margin-left: 10px;
+}
+</style>

@@ -68,20 +68,16 @@ export default createStore({
     async fetchScorers({ commit }) {
       try {
         commit('SET_LOADING_STATUS', 'loading');
-        const scorersData = await EventService.getScorers(10);
-        // TODO: fix async get crestUrl
-        // scorersData.data.scorers.forEach(
-        //   (item: { team: { id: string, crestUrl: string } }) => {
-        //     EventService.getTeamInfo(item.team.id)
-        //       .then((res) => {
-        //       // eslint-disable-next-line no-param-reassign
-        //         item.team.crestUrl = res.data.crestUrl;
-        //       })
-        //       .catch((err) => {
-        //         console.log(err);
-        //       });
-        //   },
-        // );
+        const scorersData = await EventService.getScorers(5);
+
+        await Promise.all(
+          scorersData.data.scorers
+            .map(async (scorer: { team: { id: string, crestUrl: string } }) => {
+              const teamInfo = await EventService.getTeamInfo(scorer.team.id);
+              // eslint-disable-next-line no-param-reassign
+              scorer.team.crestUrl = teamInfo.data.crestUrl;
+            }),
+        );
         commit('SET_SCORERS', scorersData.data.scorers);
       } catch (error) {
         console.log('error');
