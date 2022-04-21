@@ -1,4 +1,5 @@
 <template>
+<!--  TODO: Fix double render BackLink-->
   <BackLink url="/teams" pageName="teams" />
   <div v-loading="isLoading">
     <h3>{{ selectedTeam.name }}</h3>
@@ -20,6 +21,7 @@
       </el-descriptions-item>
     </el-descriptions>
     <h4 class="team-info__squad-title">Squad</h4>
+<!--    TODO: Fix :data="selectedTeam.squad" TypeError: data.includes is not a function-->
     <el-table :data="selectedTeam.squad" style="width: 100%">
       <el-table-column label="Name">
         <template #default="scope"><div>{{ scope.row.name }}</div></template>

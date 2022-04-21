@@ -35,9 +35,11 @@ export default createStore<State>({
     isLoading(state) {
       return state.loadingStatus === 'loading';
     },
-    // seasonYears(state) {
-    //   const date = new Date(state.table.season.startDate);
-    // }
+    seasonDate(state) {
+      const startDate = new Date(state.table.season.startDate);
+      const endDate = new Date(state.table.season.endDate);
+      return `Season ${startDate.getFullYear()} - ${endDate.getFullYear()}`;
+    },
   },
   mutations: {
     SET_LOADING_STATUS(state, status) {
