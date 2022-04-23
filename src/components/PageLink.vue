@@ -20,13 +20,12 @@ const getInfo = () => router.push({ name: props.routeName });
 
 <style lang="scss">
 .link {
-  width: 300px;
-  height: 200px;
   border: 1px solid black;
   background-color: aliceblue;
   border-radius: 5px;
     &:hover {
       cursor: pointer;
+      opacity: 0.8;
     }
 }
 </style>

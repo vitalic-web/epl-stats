@@ -1,6 +1,7 @@
 <template>
   <BackToMainLink url="/" pageName="main" />
-  <h3>{{ seasonDate }}</h3>
+  <h3>Season: {{ seasonDate }}</h3>
+  <h4>Match day: {{ season.currentMatchday }}</h4>
   <el-table
     v-loading="isLoading"
     :data="standings"
@@ -91,6 +92,8 @@ import { StandingInfo } from '@/common/types';
 const store = useStore();
 
 const standings = computed(() => store.state.table.standings);
+const season = computed(() => store.state.table.season);
+console.log('season', season);
 const isLoading = computed(() => store.getters.isLoading);
 const seasonDate = computed(() => store.getters.seasonDate);
 

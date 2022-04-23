@@ -1,0 +1,46 @@
+<template>
+  <BackToMainLink url="/" pageName="main" />
+  <h3>Winners</h3>
+  <el-row v-loading="isLoading">
+    <el-col
+      v-for="winner in winners"
+      :key="winner.id"
+      :span="6"
+    >
+      <el-card :body-style="{ padding: '0px' }">
+        <img v-if="winner.winner"
+          :alt="`${winner.winner.name} logo`"
+          :src="winner.winner.crestUrl"
+          class="winner__logo"
+        />
+        <div style="padding: 14px">
+          <span>{{ winner.winner ? winner.winner.name : 'No winner' }}</span>
+          <div class="bottom">{{ winner.years }}</div>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+import BackToMainLink from '@/components/BackLink.vue';
+
+const store = useStore();
+
+const winners = computed(() => store.state.winners);
+const isLoading = computed(() => store.getters.isLoading);
+
+console.log('winners', winners);
+
+store.dispatch('fetchWinners');
+</script>
+
+<style lang="scss">
+.winner__logo {
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+}
+</style>

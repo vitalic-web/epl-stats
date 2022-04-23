@@ -11,7 +11,7 @@ export type Squad = {
   nationality: string;
 }
 
-export type selectedTeam = {
+export type SelectedTeam = {
   name: string;
   founded: number;
   phone: string;
@@ -52,13 +52,31 @@ export type Scorer = {
   numberOfGoals: number;
 }
 
+export type ScorerTeam = {
+  id: string;
+  crestUrl: string;
+}
+
+export type Winner = {
+  startDate: string;
+  endDate: string;
+  winner: Team;
+}
+
 export interface State {
   loadingStatus: string;
   teams: Team[];
-  selectedTeam: selectedTeam;
+  selectedTeam: SelectedTeam;
   table: {
     season: Season,
     standings: StandingInfo[],
   };
   scorers: Scorer[];
+  winners: Winner[];
+}
+
+export type SeasonDates = {
+  startDate: string;
+  endDate: string;
+  years: string;
 }

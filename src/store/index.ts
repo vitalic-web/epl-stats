@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import EventService from '@/services/EventService';
-import { State } from '@/common/types';
+import { State, ScorerTeam, SeasonDates } from '@/common/types';
+import { getSeasonYears } from '@/common/utils';
 
 export default createStore<State>({
   state: {
@@ -30,15 +31,14 @@ export default createStore<State>({
       standings: [],
     },
     scorers: [],
+    winners: [],
   },
   getters: {
     isLoading(state) {
       return state.loadingStatus === 'loading';
     },
     seasonDate(state) {
-      const startDate = new Date(state.table.season.startDate);
-      const endDate = new Date(state.table.season.endDate);
-      return `Season ${startDate.getFullYear()} - ${endDate.getFullYear()}`;
+      return getSeasonYears(state.table.season.startDate, state.table.season.endDate);
     },
   },
   mutations: {
@@ -59,6 +59,9 @@ export default createStore<State>({
     },
     SET_SCORERS(state, scorers) {
       state.scorers = scorers;
+    },
+    SET_WINNERS(state, winners) {
+      state.winners = winners;
     },
   },
   actions: {
@@ -103,13 +106,29 @@ export default createStore<State>({
 
         await Promise.all(
           scorersData.data.scorers
-            .map(async (scorer: { team: { id: string, crestUrl: string } }) => {
+            .map(async (scorer: { team: ScorerTeam }) => {
               const teamInfo = await EventService.getTeamInfo(scorer.team.id);
               // eslint-disable-next-line no-param-reassign
               scorer.team.crestUrl = teamInfo.data.crestUrl;
             }),
         );
         commit('SET_SCORERS', scorersData.data.scorers);
+      } catch (error) {
+        console.log('error');
+      } finally {
+        commit('SET_LOADING_STATUS', 'notLoading');
+      }
+    },
+    async fetchWinners({ commit }) {
+      try {
+        commit('SET_LOADING_STATUS', 'loading');
+        const leagueData = await EventService.getLeagueInfo();
+        // eslint-disable-next-line array-callback-return
+        leagueData.data.seasons.map((season: SeasonDates) => {
+          // eslint-disable-next-line no-param-reassign
+          season.years = getSeasonYears(season.startDate, season.endDate);
+        });
+        commit('SET_WINNERS', leagueData.data.seasons.slice(1, 29));
       } catch (error) {
         console.log('error');
       } finally {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   API_URL,
   TOKEN,
-} from '@/constants';
+} from '@/common/constants';
 
 const apiClient = axios.create({
   baseURL: API_URL,
@@ -13,6 +13,9 @@ const apiClient = axios.create({
 });
 
 export default {
+  getLeagueInfo() {
+    return apiClient.get('/competitions/2021');
+  },
   getTeams() {
     return apiClient.get('/competitions/2021/teams');
   },

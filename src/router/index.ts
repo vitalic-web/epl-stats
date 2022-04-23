@@ -15,14 +15,14 @@ const routes: Array<RouteRecordRaw> = [
     //   {
     //     path: '',
     //     name: 'team',
-    //     component: import('../views/TeamInfo.vue'),
+    //     component: import('../views/TeamInfoView.vue'),
     //   },
     // ],
   },
   {
     path: '/teams/:id',
     name: 'team',
-    component: import('../views/TeamInfo.vue'),
+    component: import('../views/TeamInfoView.vue'),
   },
   {
     path: '/table',
@@ -33,6 +33,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/scorers',
     name: 'scorers',
     component: () => import('../views/ScorersView.vue'),
+  },
+  {
+    path: '/winners',
+    name: 'winners',
+    component: () => import('../views/WinnersView.vue'),
   },
 ];
 
