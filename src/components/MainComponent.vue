@@ -5,6 +5,7 @@
       <PageLink name="Table" routeName="table" />
       <PageLink name="Scorers" routeName="scorers" />
       <PageLink name="Winners" routeName="winners" />
+      <PageLink name="Matches" routeName="matches" />
     </div>
   </el-main>
 </template>
