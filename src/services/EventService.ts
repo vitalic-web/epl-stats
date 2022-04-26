@@ -35,4 +35,15 @@ export default {
   getTeamInfo(id: string) {
     return apiClient.get(`teams/${id}`);
   },
+  getMatches(dateFrom: string, dateTo: string) {
+    return apiClient.get(
+      'competitions/2021/matches',
+      {
+        params: {
+          dateFrom,
+          dateTo,
+        },
+      },
+    );
+  },
 };
