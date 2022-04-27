@@ -93,7 +93,6 @@ const store = useStore();
 
 const standings = computed(() => store.state.table.standings);
 const season = computed(() => store.state.table.season);
-console.log('season', season);
 const isLoading = computed(() => store.getters.isLoading);
 const seasonDate = computed(() => store.getters.seasonDate);
 
