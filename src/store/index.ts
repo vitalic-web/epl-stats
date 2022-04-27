@@ -3,6 +3,7 @@ import EventService from '@/services/EventService';
 import { State, ScorerTeam, SeasonDates } from '@/common/types';
 import { getSeasonYears } from '@/common/utils';
 
+// TODO: add vuex modules
 export default createStore<State>({
   state: {
     loadingStatus: 'notLoading',
@@ -32,6 +33,7 @@ export default createStore<State>({
     },
     scorers: [],
     winners: [],
+    matches: [],
   },
   getters: {
     isLoading(state) {
@@ -62,6 +64,9 @@ export default createStore<State>({
     },
     SET_WINNERS(state, winners) {
       state.winners = winners;
+    },
+    SET_MATCHES(state, matches) {
+      state.matches = matches;
     },
   },
   actions: {
@@ -129,6 +134,17 @@ export default createStore<State>({
           season.years = getSeasonYears(season.startDate, season.endDate);
         });
         commit('SET_WINNERS', leagueData.data.seasons.slice(1, 29));
+      } catch (error) {
+        console.log('error');
+      } finally {
+        commit('SET_LOADING_STATUS', 'notLoading');
+      }
+    },
+    async fetchMatches({ commit }, dates: SeasonDates) {
+      try {
+        commit('SET_LOADING_STATUS', 'loading');
+        const matches = await EventService.getMatches(dates.startDate, dates.endDate);
+        commit('SET_MATCHES', matches.data.matches);
       } catch (error) {
         console.log('error');
       } finally {
