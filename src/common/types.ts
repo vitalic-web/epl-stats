@@ -63,6 +63,26 @@ export type Winner = {
   winner: Team;
 }
 
+export type Goals = {
+  homeTeam: number;
+  awayTeam: number;
+}
+
+export type Score = {
+  winner: string;
+  fullTime: Goals;
+}
+
+export type Match = {
+  season: Season;
+  utcDate: string;
+  status: string;
+  matchday: number;
+  score: Score;
+  homeTeam: Team;
+  awayTeam: Team;
+}
+
 export interface State {
   loadingStatus: string;
   teams: Team[];
@@ -73,6 +93,7 @@ export interface State {
   };
   scorers: Scorer[];
   winners: Winner[];
+  matches: Match[];
 }
 
 export type SeasonDates = {
