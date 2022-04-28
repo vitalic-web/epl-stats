@@ -12,14 +12,16 @@
       @change="pickDates"
     />
     <el-button type="primary" @click="() => router.push('matches')">clear query</el-button>
+    <div style="margin-top: 10px;">matches.length: {{ matches.length }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import {
+  computed, ref, watch, toRefs,
+} from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-// TODO: fix luxon type
 import { DateTime } from 'luxon';
 import BackToMainLink from '@/components/BackLink.vue';
 
@@ -31,26 +33,22 @@ const dates = ref([route.query.startDate, route.query.endDate]);
 
 const matches = computed(() => store.state.matches);
 const isQuery = computed(() => Object.keys(route.query).length);
-console.log('route', route.query);
-console.log('isQuery', isQuery.value);
-// console.log('matches', matches);
 
 const pickDates = () => {
+  // TODO: fix dates
   const startDate = DateTime.fromJSDate(dates.value[0]).toISODate();
   const endDate = DateTime.fromJSDate(dates.value[1]).toISODate();
   router.push({ query: { startDate, endDate } });
 };
 
-watch(route.query, (value, value2) => {
-  console.log('value from watch', value);
-  console.log('value2 from watch', value2);
+const routeRef = toRefs(route);
+
+watch(routeRef.query, () => {
+  console.log('isQuery', isQuery.value);
+  store.dispatch('fetchMatches', route.query);
 });
 
-if (isQuery.value) {
-  console.log('get api data');
-}
-
-// store.dispatch('fetchMatches', route.query);
+store.dispatch('fetchMatches', route.query);
 </script>
 
 <style lang="scss">
