@@ -32,8 +32,6 @@ const store = useStore();
 const winners = computed(() => store.state.winners);
 const isLoading = computed(() => store.getters.isLoading);
 
-console.log('winners', winners);
-
 store.dispatch('fetchWinners');
 </script>
 
