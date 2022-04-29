@@ -11,11 +11,12 @@ import { useRouter } from 'vue-router';
 const props = defineProps({
   name: String,
   routeName: String,
+  query: Object,
 });
 
 const router = useRouter();
 
-const getInfo = () => router.push({ name: props.routeName });
+const getInfo = () => router.push({ name: props.routeName, query: props.query });
 </script>
 
 <style lang="scss">

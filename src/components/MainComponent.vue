@@ -5,13 +5,16 @@
       <PageLink name="Table" routeName="table" />
       <PageLink name="Scorers" routeName="scorers" />
       <PageLink name="Winners" routeName="winners" />
-      <PageLink name="Matches" routeName="matches" />
+      <PageLink name="Matches" routeName="matches" :query="weekDates" />
     </div>
   </el-main>
 </template>
 
 <script setup lang="ts">
 import PageLink from '@/components/PageLink.vue';
+import { getCurrentWeekDates } from '@/common/utils';
+
+const weekDates = getCurrentWeekDates();
 </script>
 
 <style lang="scss">
