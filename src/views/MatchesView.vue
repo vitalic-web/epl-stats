@@ -29,13 +29,12 @@ const router = useRouter();
 const route = useRoute();
 const store = useStore();
 
-const dates = ref([route.query.startDate, route.query.endDate]);
+const dates = ref([new Date(String(route.query.startDate)), new Date(String(route.query.endDate))]);
 
 const matches = computed(() => store.state.matches);
 const isQuery = computed(() => Object.keys(route.query).length);
 
 const pickDates = () => {
-  // TODO: fix dates
   const startDate = DateTime.fromJSDate(dates.value[0]).toISODate();
   const endDate = DateTime.fromJSDate(dates.value[1]).toISODate();
   router.push({ query: { startDate, endDate } });
