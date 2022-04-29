@@ -96,8 +96,11 @@ export interface State {
   matches: Match[];
 }
 
-export type SeasonDates = {
+export type WeekDates = {
   startDate: string;
   endDate: string;
+}
+
+export interface SeasonDates extends WeekDates {
   years: string;
 }

@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
 import EventService from '@/services/EventService';
-import { State, ScorerTeam, SeasonDates } from '@/common/types';
+import {
+  State, ScorerTeam, SeasonDates, WeekDates,
+} from '@/common/types';
 import { getSeasonYears } from '@/common/utils';
 
 // TODO: add vuex modules
@@ -140,7 +142,7 @@ export default createStore<State>({
         commit('SET_LOADING_STATUS', 'notLoading');
       }
     },
-    async fetchMatches({ commit }, dates: SeasonDates) {
+    async fetchMatches({ commit }, dates: WeekDates) {
       try {
         commit('SET_LOADING_STATUS', 'loading');
         const matches = await EventService.getMatches(dates.startDate, dates.endDate);
