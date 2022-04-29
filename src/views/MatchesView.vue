@@ -4,6 +4,7 @@
     <h3>Matches</h3>
     <el-date-picker
       v-model="dates"
+      :clearable="false"
       class="matches__date-picker"
       type="daterange"
       range-separator="To"
@@ -11,7 +12,7 @@
       end-placeholder="End date"
       @change="pickDates"
     />
-    <el-button type="primary" @click="() => router.push('matches')">clear query</el-button>
+    <el-button type="primary" @click="clear">clear query</el-button>
     <div style="margin-top: 10px;">matches.length: {{ matches.length }}</div>
   </div>
 </template>
@@ -22,32 +23,49 @@ import {
 } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { DateTime } from 'luxon';
 import BackToMainLink from '@/components/BackLink.vue';
+import { toDate, getDatesForQuery, getCurrentWeekDates } from '@/common/utils';
 
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
 
-const dates = ref([new Date(String(route.query.startDate)), new Date(String(route.query.endDate))]);
+const dates = ref([
+  toDate(route.query.startDate),
+  toDate(route.query.endDate),
+]);
+const routeRef = toRefs(route);
 
 const matches = computed(() => store.state.matches);
 const isQuery = computed(() => Object.keys(route.query).length);
 
 const pickDates = () => {
-  const startDate = DateTime.fromJSDate(dates.value[0]).toISODate();
-  const endDate = DateTime.fromJSDate(dates.value[1]).toISODate();
-  router.push({ query: { startDate, endDate } });
+  const query = getDatesForQuery(dates.value);
+  router.push({ query });
 };
 
-const routeRef = toRefs(route);
+const clear = () => {
+  const weekDates = getCurrentWeekDates();
+  dates.value = [
+    toDate(weekDates.startDate),
+    toDate(weekDates.endDate),
+  ];
+  pickDates();
+};
+
+const apiCallFromDates = (): void => {
+  if (!isQuery.value) {
+    store.dispatch('fetchMatches', getCurrentWeekDates());
+  } else {
+    store.dispatch('fetchMatches', route.query);
+  }
+};
 
 watch(routeRef.query, () => {
-  console.log('isQuery', isQuery.value);
-  store.dispatch('fetchMatches', route.query);
+  apiCallFromDates();
 });
 
-store.dispatch('fetchMatches', route.query);
+apiCallFromDates();
 </script>
 
 <style lang="scss">
