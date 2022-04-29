@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import EventService from '@/services/EventService';
 import {
-  State, ScorerTeam, SeasonDates, WeekDates,
+  State, ScorerTeam, SeasonDates, WeekDates, Match,
 } from '@/common/types';
 import { getSeasonYears } from '@/common/utils';
 
@@ -146,6 +146,14 @@ export default createStore<State>({
       try {
         commit('SET_LOADING_STATUS', 'loading');
         const matches = await EventService.getMatches(dates.startDate, dates.endDate);
+
+        matches.data.matches
+          .map(async (match: Match) => {
+            // eslint-disable-next-line no-param-reassign
+            match.homeTeam.crestUrl = `https://crests.football-data.org/${match.homeTeam.id}.svg`;
+            // eslint-disable-next-line no-param-reassign
+            match.awayTeam.crestUrl = `https://crests.football-data.org/${match.awayTeam.id}.svg`;
+          });
         commit('SET_MATCHES', matches.data.matches);
       } catch (error) {
         console.log('error');
