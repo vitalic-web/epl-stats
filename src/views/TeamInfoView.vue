@@ -30,7 +30,9 @@
         <template #default="scope"><div>{{ scope.row.position }}</div></template>
       </el-table-column>
       <el-table-column label="Date Of Birth">
-        <template #default="scope"><div>{{ scope.row.dateOfBirth }}</div></template>
+        <template #default="scope">
+          <div>{{ displayDateOfBirth(scope.row.dateOfBirth) }}</div>
+        </template>
       </el-table-column>
       <el-table-column label="Years">
         <template #default><div>calculate years</div></template>
@@ -47,12 +49,18 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import BackLink from '@/components/BackLink.vue';
+import { DateTime } from 'luxon';
 
 const store = useStore();
 const route = useRoute();
 
 const selectedTeam = computed(() => store.state.selectedTeam);
 const isLoading = computed(() => store.getters.isLoading);
+
+const displayDateOfBirth = (date: string) => {
+  const dt = DateTime.fromISO(date).setLocale('en-US');
+  return dt.toLocaleString(DateTime.DATE_FULL);
+};
 
 store.dispatch('fetchTeamInfo', route.params.id);
 </script>
