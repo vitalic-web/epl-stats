@@ -16,6 +16,7 @@ defineProps({
   display: flex;
   align-items: center;
   margin-right: 20px;
+  width: 100%;
   &__img {
     width: 50px;
   }

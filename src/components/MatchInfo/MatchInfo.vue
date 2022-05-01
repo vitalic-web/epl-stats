@@ -1,13 +1,24 @@
 <template>
   <div class="match-info">
     <div class="match-info__teams-container">
-      <MatchTeam :team="match.homeTeam" class="match-info__home-team" />
-      <MatchTeam :team="match.awayTeam" />
+<!--      TODO: add dynamic styles for statuses-->
+      <div>{{ match.status }}</div>
+      <div class="match-info__team match-info__home-team">
+        <MatchTeam :team="match.homeTeam" />
+        <div class="match-info__score">{{ match.score.fullTime.homeTeam }}</div>
+      </div>
+      <div class="match-info__team">
+        <MatchTeam :team="match.awayTeam" />
+        <!--      TODO: add winner icon-->
+        <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
+      </div>
     </div>
     <div class="match-info__time">
-      <div v-if="isToday">Today</div>
-      <div v-else>{{ displayedDate }}</div>
-      <div>{{ displayedTime }}</div>
+      <div>
+        <div v-if="isToday">Today</div>
+        <div v-else>{{ displayedDate }}</div>
+        <div>{{ displayedTime }}</div>
+      </div>
     </div>
   </div >
 </template>
@@ -32,8 +43,6 @@ const displayedDate = computed(() => {
 });
 
 const displayedTime = computed(() => dt.toFormat('T'));
-
-console.log(dt);
 </script>
 
 <style lang="scss">
@@ -43,9 +52,14 @@ console.log(dt);
   margin: 5px 0;
   border-radius: 5px;
   padding: 10px;
+  width: 450px;
   &__teams-container {
     display: flex;
     flex-direction: column;
+    width: 80%;
+  }
+  &__team {
+    display: flex;
   }
   &__home-team {
     margin-bottom: 10px;
@@ -55,7 +69,13 @@ console.log(dt);
     flex-direction: column;
     justify-content: center;
     border-left: 1px solid gray;
-    padding-left: 10px;
+    width: 25%;
+  }
+  &__score {
+    margin-right: 10px;
+    align-self: center;
+    font-size: 20px;
+    font-weight: bold;
   }
 }
 </style>
