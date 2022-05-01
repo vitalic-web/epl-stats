@@ -1,15 +1,13 @@
 <template>
   <div class="match-info">
     <div class="match-info__teams-container">
-<!--      TODO: add dynamic styles for statuses-->
-      <div>{{ match.status }}</div>
+      <MatchStatus :status="match.status" />
       <div class="match-info__team match-info__home-team">
         <MatchTeam :team="match.homeTeam" />
         <div class="match-info__score">{{ match.score.fullTime.homeTeam }}</div>
       </div>
       <div class="match-info__team">
         <MatchTeam :team="match.awayTeam" />
-        <!--      TODO: add winner icon-->
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
     </div>
@@ -27,6 +25,7 @@
 import { computed } from 'vue';
 import { DateTime, DateTimeFormatOptions } from 'luxon';
 import MatchTeam from './MatchTeam.vue';
+import MatchStatus from './MatchStatus.vue';
 
 const props = defineProps({
   match: Object,
@@ -36,13 +35,12 @@ const dt = DateTime.fromISO(props.match && props.match.utcDate).setLocale('en-US
 const currentDate = DateTime.now().setLocale('en-US');
 
 const isToday = computed(() => (dt.day === currentDate.day) && (dt.month === currentDate.month));
+const displayedTime = computed(() => dt.toFormat('T'));
 
 const displayedDate = computed(() => {
   const format: DateTimeFormatOptions = { month: 'long', day: 'numeric' };
   return dt.toLocaleString(format);
 });
-
-const displayedTime = computed(() => dt.toFormat('T'));
 </script>
 
 <style lang="scss">
