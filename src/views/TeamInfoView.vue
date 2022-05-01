@@ -35,7 +35,7 @@
         </template>
       </el-table-column>
       <el-table-column label="Years">
-        <template #default><div>calculate years</div></template>
+        <template #default="scope"><div>{{ getYears(scope.row.dateOfBirth) }}</div></template>
       </el-table-column>
       <el-table-column label="Nationality">
         <template #default="scope"><div>{{ scope.row.nationality }}</div></template>
@@ -60,6 +60,12 @@ const isLoading = computed(() => store.getters.isLoading);
 const displayDateOfBirth = (date: string) => {
   const dt = DateTime.fromISO(date).setLocale('en-US');
   return dt.toLocaleString(DateTime.DATE_FULL);
+};
+
+const getYears = (date: string) => {
+  const start = DateTime.fromISO(date).setLocale('en-US');
+  const end = DateTime.now();
+  return Math.floor(end.diff(start, 'years').years);
 };
 
 store.dispatch('fetchTeamInfo', route.params.id);
