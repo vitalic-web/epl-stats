@@ -5,15 +5,17 @@
     <el-date-picker
       v-model="dates"
       :clearable="false"
-      class="matches__date-picker"
+      class="matches__margin"
       type="daterange"
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date"
       @change="pickDates"
     />
-    <el-button type="primary" @click="clear">clear query</el-button>
-    <div style="margin-top: 10px;">matches.length: {{ matches.length }}</div>
+    <el-button class="matches__margin" type="primary" @click="clear">current week</el-button>
+    <div v-loading="isLoading" v-for="match in matches" :key="match.id">
+      <MatchInfo :match="match" />
+    </div>
   </div>
 </template>
 
@@ -24,6 +26,7 @@ import {
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import BackToMainLink from '@/components/BackLink.vue';
+import MatchInfo from '@/components/MatchInfo/MatchInfo.vue';
 import { toDate, getDatesForQuery, getCurrentWeekDates } from '@/common/utils';
 
 const router = useRouter();
@@ -37,6 +40,7 @@ const dates = ref([
 const routeRef = toRefs(route);
 
 const matches = computed(() => store.state.matches);
+const isLoading = computed(() => store.getters.isLoading);
 const isQuery = computed(() => Object.keys(route.query).length);
 
 const pickDates = () => {
@@ -73,7 +77,7 @@ apiCallFromDates();
   display: flex;
   flex-direction: column;
   align-items: center;
-  &__date-picker {
+  &__margin {
     margin-bottom: 20px;
   }
 }
