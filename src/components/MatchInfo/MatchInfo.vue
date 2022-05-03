@@ -10,6 +10,7 @@
         <MatchTeam :team="match.awayTeam" />
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
+      <MatchReferee :referee="match.referees.length && match.referees[0].name" />
     </div>
     <div class="match-info__time">
       <div>
@@ -26,6 +27,7 @@ import { computed } from 'vue';
 import { DateTime, DateTimeFormatOptions } from 'luxon';
 import MatchTeam from './MatchTeam.vue';
 import MatchStatus from './MatchStatus.vue';
+import MatchReferee from './MatchReferee.vue';
 
 const props = defineProps({
   match: Object,
