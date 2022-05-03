@@ -29,9 +29,12 @@ const getCurrentWeekDates = (): WeekDates => {
   };
 };
 
+const getCrestUrl = (id: number | string) => `https://crests.football-data.org/${id}.svg`;
+
 export {
   getSeasonYears,
   toDate,
   getDatesForQuery,
   getCurrentWeekDates,
+  getCrestUrl,
 };

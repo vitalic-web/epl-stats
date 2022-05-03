@@ -3,7 +3,7 @@ import EventService from '@/services/EventService';
 import {
   State, ScorerTeam, SeasonDates, WeekDates, Match,
 } from '@/common/types';
-import { getSeasonYears } from '@/common/utils';
+import { getSeasonYears, getCrestUrl } from '@/common/utils';
 
 // TODO: add vuex modules
 export default createStore<State>({
@@ -109,16 +109,13 @@ export default createStore<State>({
     async fetchScorers({ commit }) {
       try {
         commit('SET_LOADING_STATUS', 'loading');
-        const scorersData = await EventService.getScorers(5);
+        const scorersData = await EventService.getScorers(10);
 
-        await Promise.all(
-          scorersData.data.scorers
-            .map(async (scorer: { team: ScorerTeam }) => {
-              const teamInfo = await EventService.getTeamInfo(scorer.team.id);
-              // eslint-disable-next-line no-param-reassign
-              scorer.team.crestUrl = teamInfo.data.crestUrl;
-            }),
-        );
+        scorersData.data.scorers
+          .map(async (scorer: { team: ScorerTeam }) => {
+            // eslint-disable-next-line no-param-reassign
+            scorer.team.crestUrl = getCrestUrl(scorer.team.id);
+          });
         commit('SET_SCORERS', scorersData.data.scorers);
       } catch (error) {
         console.log('error');
@@ -150,9 +147,9 @@ export default createStore<State>({
         matches.data.matches
           .map(async (match: Match) => {
             // eslint-disable-next-line no-param-reassign
-            match.homeTeam.crestUrl = `https://crests.football-data.org/${match.homeTeam.id}.svg`;
+            match.homeTeam.crestUrl = getCrestUrl(match.homeTeam.id);
             // eslint-disable-next-line no-param-reassign
-            match.awayTeam.crestUrl = `https://crests.football-data.org/${match.awayTeam.id}.svg`;
+            match.awayTeam.crestUrl = getCrestUrl(match.awayTeam.id);
           });
         commit('SET_MATCHES', matches.data.matches);
       } catch (error) {
