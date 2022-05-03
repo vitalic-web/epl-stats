@@ -42,6 +42,10 @@ const isScheduled = computed(() => props.status === 'SCHEDULED');
   }
   &__in-play {
     color: darkorange;
+    animation: text 3s linear infinite;
+  }
+  @keyframes text {
+    50% { opacity: 0; }
   }
 }
 </style>
