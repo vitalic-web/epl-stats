@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/teams/:id',
     name: 'team',
-    component: import('../views/TeamInfoView.vue'),
+    component: () => import('../views/TeamInfoView.vue'),
   },
   {
     path: '/table',
