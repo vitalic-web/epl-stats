@@ -21,6 +21,7 @@ const props = defineProps({
   status: String,
 });
 
+// TODO: statuses in enum
 const isInPlay = computed(() => props.status === 'IN_PLAY');
 const isFinished = computed(() => props.status === 'FINISHED');
 const isScheduled = computed(() => props.status === 'SCHEDULED');
