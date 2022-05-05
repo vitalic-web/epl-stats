@@ -16,15 +16,15 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { AlarmClock, CircleCheck, Calendar } from '@element-plus/icons-vue';
+import { Statuses } from '@/common/constants';
 
 const props = defineProps({
   status: String,
 });
 
-// TODO: statuses in enum
-const isInPlay = computed(() => props.status === 'IN_PLAY');
-const isFinished = computed(() => props.status === 'FINISHED');
-const isScheduled = computed(() => props.status === 'SCHEDULED');
+const isInPlay = computed(() => props.status === Statuses.InPlay);
+const isFinished = computed(() => props.status === Statuses.Finished);
+const isScheduled = computed(() => props.status === Statuses.Scheduled);
 </script>
 
 <style lang="scss">
