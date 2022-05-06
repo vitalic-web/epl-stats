@@ -1,5 +1,5 @@
 <template>
-  <BackToMainLink url="/" pageName="main" />
+  <breadcrumb-nav />
   <h3>Teams</h3>
   <el-row v-loading="isLoading">
     <el-col
@@ -29,13 +29,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import BackToMainLink from '@/components/BackLink.vue';
+import BreadcrumbNav from '@/components/BreadcrumbNav.vue';
 
 const store = useStore();
 const router = useRouter();
+
+const navItems = ref([
+  { path: '/', name: 'homepage' },
+  { path: null, name: 'teams' },
+]);
 
 const teams = computed(() => store.state.teams);
 const isLoading = computed(() => store.getters.isLoading);

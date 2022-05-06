@@ -41,7 +41,9 @@ const routeRef = toRefs(route);
 
 const matches = computed(() => store.state.matches);
 const isLoading = computed(() => store.getters.isLoading);
+// TODO: fix to boolean
 const isQuery = computed(() => Object.keys(route.query).length);
+console.log('isQuery', isQuery.value);
 
 const pickDates = () => {
   const query = getDatesForQuery(dates.value);
