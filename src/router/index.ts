@@ -11,17 +11,14 @@ const routes: Array<RouteRecordRaw> = [
     name: 'teams',
     component: () => import('../views/TeamsListView.vue'),
     // TODO: fix children routes, add <router-view></router-view> in parent
-    // children: [
-    //   {
-    //     path: '',
-    //     name: 'team',
-    //     component: import('../views/TeamInfoView.vue'),
-    //   },
-    // ],
   },
   {
     path: '/teams/:id',
     name: 'team',
+    meta: {
+      baseUrl: '/teams',
+      baseUrlName: 'teams',
+    },
     component: () => import('../views/TeamInfoView.vue'),
   },
   {
