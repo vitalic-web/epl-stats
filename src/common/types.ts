@@ -104,10 +104,3 @@ export type WeekDates = {
 export interface SeasonDates extends WeekDates {
   years: string;
 }
-
-export type BreadcrumbItem = {
-  path: string | null;
-  name: string;
-}
-
-export type Breadcrumb = BreadcrumbItem[];
