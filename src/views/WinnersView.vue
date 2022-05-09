@@ -1,5 +1,5 @@
 <template>
-  <BackToMainLink url="/" pageName="main" />
+  <breadcrumb-nav />
   <h3>Winners</h3>
   <el-row v-loading="isLoading">
     <el-col
@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import BackToMainLink from '@/components/BackLink.vue';
 
 const store = useStore();
 

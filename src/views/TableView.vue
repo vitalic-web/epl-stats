@@ -1,5 +1,5 @@
 <template>
-  <BackToMainLink url="/" pageName="main" />
+  <breadcrumb-nav />
   <h3>Season: {{ seasonDate }}</h3>
   <h4>Match day: {{ season.currentMatchday }}</h4>
   <el-table
@@ -86,7 +86,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import BackToMainLink from '@/components/BackLink.vue';
 import { StandingInfo } from '@/common/types';
 
 const store = useStore();

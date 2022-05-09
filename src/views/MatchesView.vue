@@ -1,6 +1,6 @@
 <template>
   <div class="matches">
-    <BackToMainLink url="/" pageName="main" />
+    <breadcrumb-nav class="matches__breadcrumb" />
     <h3>Matches</h3>
     <el-date-picker
       v-model="dates"
@@ -25,7 +25,6 @@ import {
 } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import BackToMainLink from '@/components/BackLink.vue';
 import MatchInfo from '@/components/MatchInfo/MatchInfo.vue';
 import { toDate, getDatesForQuery, getCurrentWeekDates } from '@/common/utils';
 
@@ -42,7 +41,6 @@ const routeRef = toRefs(route);
 const matches = computed(() => store.state.matches);
 const isLoading = computed(() => store.getters.isLoading);
 const isQuery = computed(() => Boolean(Object.keys(route.query).length));
-console.log('isQuery', isQuery.value);
 
 const pickDates = () => {
   const query = getDatesForQuery(dates.value);
@@ -80,6 +78,9 @@ apiCallFromDates();
   align-items: center;
   &__margin {
     margin-bottom: 20px;
+  }
+  &__breadcrumb {
+    align-self: flex-start;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <breadcrumb-nav />
+  <breadcrumb-nav :name="selectedTeam.name" />
   <div v-loading="isLoading">
     <h3>{{ selectedTeam.name }}</h3>
     <el-image style="width: 200px; height: 200px" :src="selectedTeam.crestUrl" fit="contain" />
@@ -47,7 +47,6 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import { DateTime } from 'luxon';
-import BreadcrumbNav from '@/components/BreadcrumbNav.vue';
 
 const store = useStore();
 const route = useRoute();

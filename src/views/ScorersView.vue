@@ -1,5 +1,5 @@
 <template>
-  <BackLink url="/" pageName="main" />
+  <breadcrumb-nav />
   <h3>Scorers</h3>
   <el-table
     v-loading="isLoading"
@@ -46,7 +46,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import BackLink from '@/components/BackLink.vue';
 import { Scorer } from '@/common/types';
 
 const store = useStore();

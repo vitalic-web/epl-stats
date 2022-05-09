@@ -29,18 +29,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import BreadcrumbNav from '@/components/BreadcrumbNav.vue';
 
 const store = useStore();
 const router = useRouter();
-
-const navItems = ref([
-  { path: '/', name: 'homepage' },
-  { path: null, name: 'teams' },
-]);
 
 const teams = computed(() => store.state.teams);
 const isLoading = computed(() => store.getters.isLoading);
