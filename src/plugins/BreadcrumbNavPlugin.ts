@@ -1,16 +1,10 @@
 import { App, Plugin } from 'vue';
 import BreadcrumbNav from '@/components/BreadcrumbNav.vue';
 
-export default <Plugin> {
+const BreadcrumbNavPlugin: Plugin = {
   install: (app: App) => {
     app.component('breadcrumb-nav', BreadcrumbNav);
   },
 };
 
-// const BreadcrumbNavPlugin: Plugin = {
-//   install: (app: App, options) => {
-//     app.component('breadcrumb-nav', BreadcrumbNav);
-//   },
-// };
-
-// export default BreadcrumbNavPlugin;
+export default BreadcrumbNavPlugin;
