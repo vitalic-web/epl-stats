@@ -6,7 +6,11 @@ import {
 import { getSeasonYears, getCrestUrl } from '@/common/utils';
 
 // TODO: add vuex modules
-export default createStore<State>({
+// common module (loading)
+// teams module (teams, team info)
+// stats module (table, scorers, winners)
+// matches module (matches)
+export default createStore({
   state: {
     loadingStatus: 'notLoading',
     teams: [],

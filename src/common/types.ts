@@ -96,6 +96,10 @@ export interface State {
   matches: Match[];
 }
 
+export interface Common {
+  loadingStatus: string;
+}
+
 export type WeekDates = {
   startDate: string;
   endDate: string;
