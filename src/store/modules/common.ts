@@ -1,28 +1,19 @@
-/* eslint-disable no-shadow */
-
-// TODO: fix to object
-
+import { Module } from 'vuex';
 import { Common } from '@/common/types';
 
-const state = (): Common => ({
-  loadingStatus: 'notLoading',
-});
-
-const getters = {
-  isLoading(state: Common): boolean {
-    return state.loadingStatus === 'loading';
+// TODO: fix Module<This is state, This is rootState>
+const common: Module<Common, Common> = {
+  state: () => ({
+    loadingStatus: 'notLoading',
+  }),
+  getters: {
+    isLoading(state): boolean {
+      return state.loadingStatus === 'loading';
+    },
   },
-};
-
-const mutations = {
-  SET_LOADING_STATUS(state: Common, status: string) {
-    state.loadingStatus = status;
+  mutations: {
+    SET_LOADING_STATUS(state, status: string) {
+      state.loadingStatus = status;
+    },
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  mutations,
 };
