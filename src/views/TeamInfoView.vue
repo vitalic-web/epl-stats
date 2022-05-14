@@ -51,7 +51,7 @@ import { DateTime } from 'luxon';
 const store = useStore();
 const route = useRoute();
 
-const selectedTeam = computed(() => store.state.selectedTeam);
+const selectedTeam = computed(() => store.state.teams.selectedTeam);
 const isLoading = computed(() => store.getters.isLoading);
 
 const displayDateOfBirth = (date: string) => {
