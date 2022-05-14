@@ -1,8 +1,7 @@
 import { Module } from 'vuex';
-import { Common } from '@/common/types';
+import { Common, RootState } from '@/common/types';
 
-// TODO: fix Module<This is state, This is rootState>
-const common: Module<Common, Common> = {
+const common: Module<Common, RootState> = {
   state: () => ({
     loadingStatus: 'notLoading',
   }),
@@ -17,3 +16,5 @@ const common: Module<Common, Common> = {
     },
   },
 };
+
+export default common;
