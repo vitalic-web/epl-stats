@@ -10,7 +10,7 @@
         <MatchTeam :team="match.awayTeam" />
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
-      <MatchReferee :referee="match.referees.length && match.referees[0].name" />
+      <MatchReferee :referee="match.referees.length ? match.referees[0].name : null" />
     </div>
     <div class="match-info__time">
       <div>
