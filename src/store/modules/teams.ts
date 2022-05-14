@@ -4,11 +4,11 @@ import EventService from '@/services/EventService';
 
 const teams: Module<Teams, RootState> = {
   state: () => ({
-    teams: [],
+    allTeams: [],
   }),
   mutations: {
-    SET_TEAMS(state, teamsData) {
-      state.teams = teamsData;
+    SET_ALL_TEAMS(state, teamsData) {
+      state.allTeams = teamsData;
     },
   },
   actions: {
@@ -16,7 +16,7 @@ const teams: Module<Teams, RootState> = {
       try {
         commit('SET_LOADING_STATUS', 'loading');
         const teamsData = await EventService.getTeams();
-        commit('SET_TEAMS', teamsData.data.teams);
+        commit('SET_ALL_TEAMS', teamsData.data.teams);
       } catch (error) {
         console.log('error');
       } finally {

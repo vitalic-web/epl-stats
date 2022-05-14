@@ -88,7 +88,8 @@ export interface Common {
 }
 
 export interface Teams {
-  teams: Team[];
+  allTeams: Team[];
+  // selectedTeam: SelectedTeam;
 }
 
 export interface RootState {
