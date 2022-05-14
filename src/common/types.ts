@@ -83,6 +83,19 @@ export type Match = {
   awayTeam: Team;
 }
 
+export interface Common {
+  loadingStatus: string;
+}
+
+export interface Teams {
+  teams: Team[];
+}
+
+export interface RootState {
+  common: Common;
+  teams: Teams;
+}
+
 export interface State {
   loadingStatus: string;
   teams: Team[];
@@ -94,10 +107,6 @@ export interface State {
   scorers: Scorer[];
   winners: Winner[];
   matches: Match[];
-}
-
-export interface Common {
-  loadingStatus: string;
 }
 
 export type WeekDates = {
