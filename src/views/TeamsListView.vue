@@ -36,7 +36,7 @@ import { useRouter } from 'vue-router';
 const store = useStore();
 const router = useRouter();
 
-const teams = computed(() => store.state.teams);
+const teams = computed(() => store.state.teams.teams);
 const isLoading = computed(() => store.getters.isLoading);
 
 const getTeamInfo = (teamId: string) => {
