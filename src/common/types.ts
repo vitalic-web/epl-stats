@@ -99,6 +99,7 @@ export interface Table {
 
 export interface Stats {
   table: Table;
+  scorers: Scorer[];
 }
 
 export interface RootState {
