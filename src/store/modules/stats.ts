@@ -1,5 +1,7 @@
 import { Module } from 'vuex';
-import { Stats, RootState, ScorerTeam } from '@/common/types';
+import {
+  Stats, RootState, ScorerTeam, SeasonDates,
+} from '@/common/types';
 import { getSeasonYears, getCrestUrl } from '@/common/utils';
 import EventService from '@/services/EventService';
 
@@ -14,6 +16,7 @@ const teams: Module<Stats, RootState> = {
       standings: [],
     },
     scorers: [],
+    winners: [],
   }),
   getters: {
     seasonDate(state) {
@@ -29,6 +32,9 @@ const teams: Module<Stats, RootState> = {
     },
     SET_SCORERS(state, scorersData) {
       state.scorers = scorersData;
+    },
+    SET_WINNERS(state, winners) {
+      state.winners = winners;
     },
   },
   actions: {
@@ -55,6 +61,22 @@ const teams: Module<Stats, RootState> = {
             scorer.team.crestUrl = getCrestUrl(scorer.team.id);
           });
         commit('SET_SCORERS', scorersData.data.scorers);
+      } catch (error) {
+        console.log('error');
+      } finally {
+        commit('SET_LOADING_STATUS', 'notLoading');
+      }
+    },
+    async fetchWinners({ commit }) {
+      try {
+        commit('SET_LOADING_STATUS', 'loading');
+        const leagueData = await EventService.getLeagueInfo();
+        // eslint-disable-next-line array-callback-return
+        leagueData.data.seasons.map((season: SeasonDates) => {
+          // eslint-disable-next-line no-param-reassign
+          season.years = getSeasonYears(season.startDate, season.endDate);
+        });
+        commit('SET_WINNERS', leagueData.data.seasons.slice(1, 29));
       } catch (error) {
         console.log('error');
       } finally {
