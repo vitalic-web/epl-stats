@@ -100,6 +100,7 @@ export interface Table {
 export interface Stats {
   table: Table;
   scorers: Scorer[];
+  winners: Winner[];
 }
 
 export interface RootState {
