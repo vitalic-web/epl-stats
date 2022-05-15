@@ -28,7 +28,7 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 
-const winners = computed(() => store.state.winners);
+const winners = computed(() => store.state.stats.winners);
 const isLoading = computed(() => store.getters.isLoading);
 
 store.dispatch('fetchWinners');
