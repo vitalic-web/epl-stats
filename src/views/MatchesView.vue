@@ -38,7 +38,7 @@ const dates = ref([
 ]);
 const routeRef = toRefs(route);
 
-const matches = computed(() => store.state.matches);
+const matches = computed(() => store.state.matches.allMatches);
 const isLoading = computed(() => store.getters.isLoading);
 const isQuery = computed(() => Boolean(Object.keys(route.query).length));
 
