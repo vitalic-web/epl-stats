@@ -103,23 +103,15 @@ export interface Stats {
   winners: Winner[];
 }
 
+export interface Matches {
+  allMatches: Match[];
+}
+
 export interface RootState {
   common: Common;
   teams: Teams;
   stats: Stats;
-}
-
-export interface State {
-  loadingStatus: string;
-  teams: Team[];
-  selectedTeam: SelectedTeam;
-  table: {
-    season: Season,
-    standings: StandingInfo[],
-  };
-  scorers: Scorer[];
-  winners: Winner[];
-  matches: Match[];
+  matches: Matches;
 }
 
 export type WeekDates = {
