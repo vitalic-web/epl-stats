@@ -2,6 +2,7 @@
   <breadcrumb-nav :name="selectedTeam.name" />
   <div v-loading="isLoading">
     <h3>{{ selectedTeam.name }}</h3>
+<!--TODO: fix FAILED text on image when it loading    -->
     <el-image style="width: 200px; height: 200px" :src="selectedTeam.crestUrl" fit="contain" />
     <el-descriptions
       title="Information"

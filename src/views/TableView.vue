@@ -90,8 +90,8 @@ import { StandingInfo } from '@/common/types';
 
 const store = useStore();
 
-const standings = computed(() => store.state.table.standings);
-const season = computed(() => store.state.table.season);
+const standings = computed(() => store.state.stats.table.standings);
+const season = computed(() => store.state.stats.table.season);
 const isLoading = computed(() => store.getters.isLoading);
 const seasonDate = computed(() => store.getters.seasonDate);
 
