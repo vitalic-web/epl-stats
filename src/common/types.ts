@@ -92,9 +92,19 @@ export interface Teams {
   selectedTeam: SelectedTeam;
 }
 
+export interface Table {
+  season: Season;
+  standings: StandingInfo[];
+}
+
+export interface Stats {
+  table: Table;
+}
+
 export interface RootState {
   common: Common;
   teams: Teams;
+  stats: Stats;
 }
 
 export interface State {
