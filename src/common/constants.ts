@@ -6,6 +6,7 @@ enum Statuses {
   InPlay = 'IN_PLAY',
   Finished = 'FINISHED',
   Scheduled = 'SCHEDULED',
+  Paused = 'PAUSED',
 }
 
 export {

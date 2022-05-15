@@ -3,6 +3,10 @@
     <el-icon class="match-status__icon"><alarm-clock /></el-icon>
     <span>{{ status.toLowerCase() }}</span>
   </div>
+  <div v-if="isPaused" class="match-status match-status__paused">
+    <el-icon class="match-status__icon"><lock /></el-icon>
+    <span>{{ status.toLowerCase() }}</span>
+  </div>
   <div v-if="isFinished" class="match-status match-status__finished">
     <el-icon class="match-status__icon"><circle-check /></el-icon>
     <span>{{ status.toLowerCase() }}</span>
@@ -15,7 +19,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { AlarmClock, CircleCheck, Calendar } from '@element-plus/icons-vue';
+import {
+  AlarmClock, CircleCheck, Calendar, Lock,
+} from '@element-plus/icons-vue';
 import { Statuses } from '@/common/constants';
 
 const props = defineProps({
@@ -25,6 +31,7 @@ const props = defineProps({
 const isInPlay = computed(() => props.status === Statuses.InPlay);
 const isFinished = computed(() => props.status === Statuses.Finished);
 const isScheduled = computed(() => props.status === Statuses.Scheduled);
+const isPaused = computed(() => props.status === Statuses.Paused);
 </script>
 
 <style lang="scss">
@@ -44,6 +51,9 @@ const isScheduled = computed(() => props.status === Statuses.Scheduled);
   &__in-play {
     color: darkorange;
     animation: text 3s linear infinite;
+  }
+  &__paused {
+    color: darkgoldenrod;
   }
   @keyframes text {
     50% { opacity: 0; }
