@@ -50,7 +50,7 @@ import { Scorer } from '@/common/types';
 
 const store = useStore();
 
-const scorers = computed(() => store.state.scorers);
+const scorers = computed(() => store.state.stats.scorers);
 const isLoading = computed(() => store.getters.isLoading);
 
 const tableRowClassName = ({
