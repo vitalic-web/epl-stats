@@ -11,6 +11,11 @@
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
       <MatchReferee :referee="match.referees.length ? match.referees[0].name : null" />
+      <el-button
+        class="match-info__teams-stats"
+        @click="showTeamsStats"
+      >Show teams stats</el-button>
+      <MatchTeamsStats v-if="!isShowedTeamsStats" :teamsStats="teamsStats" />
     </div>
     <div class="match-info__time">
       <div>
@@ -23,15 +28,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
 import { DateTime, DateTimeFormatOptions } from 'luxon';
 import MatchTeam from './MatchTeam.vue';
 import MatchStatus from './MatchStatus.vue';
 import MatchReferee from './MatchReferee.vue';
+import MatchTeamsStats from './MatchTeamsStats.vue';
 
 const props = defineProps({
   match: Object,
 });
+
+const store = useStore();
+
+// console.log(props.match.id);
+
+const isShowedTeamsStats = ref(false);
 
 const dt = DateTime.fromISO(props.match && props.match.utcDate).setLocale('en-US');
 const currentDate = DateTime.now().setLocale('en-US');
@@ -43,6 +56,16 @@ const displayedDate = computed(() => {
   const format: DateTimeFormatOptions = { month: 'long', day: 'numeric' };
   return dt.toLocaleString(format);
 });
+
+const teamsStats = computed(() => store.state.matches.teamsStats);
+const isLoadingTeamsStats = computed(() => store.state.matches.isLoading);
+
+const showTeamsStats = () => {
+  // isShowedTeamsStats.value = !isShowedTeamsStats.value;
+  if (props.match) {
+    store.dispatch('fetchMatchTeamsStats', props.match.id);
+  }
+};
 </script>
 
 <style lang="scss">
@@ -76,6 +99,10 @@ const displayedDate = computed(() => {
     align-self: center;
     font-size: 20px;
     font-weight: bold;
+  }
+  &__teams-stats {
+    width: 97%;
+    margin-top: 10px;
   }
 }
 </style>
