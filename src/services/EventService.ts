@@ -46,4 +46,7 @@ export default {
       },
     );
   },
+  getMatchTeamsStats(id: number) {
+    return apiClient.get(`matches/${id}`);
+  },
 };
