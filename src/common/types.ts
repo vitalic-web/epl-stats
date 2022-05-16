@@ -103,8 +103,25 @@ export interface Stats {
   winners: Winner[];
 }
 
+export interface MatchTeam {
+  id: number;
+  name: string;
+  wins: number;
+  draws: number;
+  losses: number;
+}
+
+export interface TeamsStats {
+  numberOfMatches: number;
+  totalGoals: number;
+  homeTeam: MatchTeam;
+  awayTeam: MatchTeam;
+}
+
 export interface Matches {
   allMatches: Match[];
+  teamsStats: TeamsStats;
+  isLoading: boolean;
 }
 
 export interface RootState {
