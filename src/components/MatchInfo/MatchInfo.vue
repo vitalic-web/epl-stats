@@ -12,8 +12,14 @@
       </div>
       <MatchReferee :referee="match.referees.length ? match.referees[0].name : null" />
       <el-collapse @change="showTeamsStats">
-        <el-collapse-item v-loading="isLoadingTeamsStats" title="Show teams stats" name="stats">
-          <MatchTeamsStats :teamsStats="teamsStats"/>
+        <el-collapse-item name="stats">
+            <template #title>
+              <div class="match-info__stats">
+                <el-icon class="header-icon"><histogram /></el-icon>
+                <span class="match-info__stats-title">show teams stats</span>
+              </div>
+            </template>
+          <MatchTeamsStats v-loading="isLoadingTeamsStats" :teamsStats="teamsStats"/>
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -31,6 +37,7 @@
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { DateTime, DateTimeFormatOptions } from 'luxon';
+import { Histogram } from '@element-plus/icons-vue';
 import MatchTeam from './MatchTeam.vue';
 import MatchStatus from './MatchStatus.vue';
 import MatchReferee from './MatchReferee.vue';
@@ -99,6 +106,13 @@ const showTeamsStats = () => {
     align-self: center;
     font-size: 20px;
     font-weight: bold;
+  }
+  &__stats {
+    display: flex;
+    align-items: center;
+    &-title {
+      margin-left: 5px;
+    }
   }
 }
 

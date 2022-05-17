@@ -24,7 +24,7 @@ const isReferee = computed(() => props.referee || 'there is no information yet')
 <style lang="scss">
 .match-referee {
   align-self: flex-start;
-  margin-top: 10px;
+  margin: 10px 0;
   display: flex;
   &__title {
     display: flex;
