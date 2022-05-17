@@ -60,11 +60,9 @@ const teams: Module<Matches, RootState> = {
       }
     },
     async fetchMatchTeamsStats({ commit }, id: number) {
-      console.log('is fetchMatchTeamsStats ??????');
       try {
         commit('SET_IS_LOADING', true);
         const teamsStats = await EventService.getMatchTeamsStats(id);
-        console.log('teamsStats.data.head2head', teamsStats.data.head2head);
         commit('SET_TEAMS_STATS', teamsStats.data.head2head);
       } catch (error) {
         console.log('error');
