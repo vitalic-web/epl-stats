@@ -15,7 +15,11 @@
         class="match-info__teams-stats"
         @click="showTeamsStats"
       >Show teams stats</el-button>
-      <MatchTeamsStats v-if="!isShowedTeamsStats" :teamsStats="teamsStats" />
+      <MatchTeamsStats
+        v-loading="isLoadingTeamsStats"
+        v-if="isShowedTeamsStats"
+        :teamsStats="teamsStats"
+      />
     </div>
     <div class="match-info__time">
       <div>
@@ -42,8 +46,6 @@ const props = defineProps({
 
 const store = useStore();
 
-// console.log(props.match.id);
-
 const isShowedTeamsStats = ref(false);
 
 const dt = DateTime.fromISO(props.match && props.match.utcDate).setLocale('en-US');
@@ -61,9 +63,11 @@ const teamsStats = computed(() => store.state.matches.teamsStats);
 const isLoadingTeamsStats = computed(() => store.state.matches.isLoading);
 
 const showTeamsStats = () => {
-  // isShowedTeamsStats.value = !isShowedTeamsStats.value;
   if (props.match) {
-    store.dispatch('fetchMatchTeamsStats', props.match.id);
+    isShowedTeamsStats.value = !isShowedTeamsStats.value;
+    if (isShowedTeamsStats.value) {
+      store.dispatch('fetchMatchTeamsStats', props.match.id);
+    }
   }
 };
 </script>
