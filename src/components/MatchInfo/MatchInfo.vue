@@ -11,15 +11,11 @@
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
       <MatchReferee :referee="match.referees.length ? match.referees[0].name : null" />
-      <el-button
-        class="match-info__teams-stats"
-        @click="showTeamsStats"
-      >Show teams stats</el-button>
-      <MatchTeamsStats
-        v-loading="isLoadingTeamsStats"
-        v-if="isShowedTeamsStats"
-        :teamsStats="teamsStats"
-      />
+      <el-collapse @change="showTeamsStats">
+        <el-collapse-item v-loading="isLoadingTeamsStats" title="Show teams stats" name="stats">
+          <MatchTeamsStats :teamsStats="teamsStats"/>
+        </el-collapse-item>
+      </el-collapse>
     </div>
     <div class="match-info__time">
       <div>
@@ -104,9 +100,10 @@ const showTeamsStats = () => {
     font-size: 20px;
     font-weight: bold;
   }
-  &__teams-stats {
-    width: 97%;
-    margin-top: 10px;
-  }
+}
+
+.el-collapse-item__header {
+  font-size: 16px;
+  font-weight: normal;
 }
 </style>
