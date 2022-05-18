@@ -11,17 +11,19 @@
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
       <MatchReferee :referee="match.referees.length ? match.referees[0].name : null" />
-      <el-collapse @change="showTeamsStats">
-        <el-collapse-item name="stats">
-            <template #title>
-              <div class="match-info__stats">
-                <el-icon class="header-icon"><histogram /></el-icon>
-                <span class="match-info__stats-title">show teams stats</span>
-              </div>
-            </template>
-          <MatchTeamsStats v-loading="isLoadingTeamsStats" :teamsStats="teamsStats"/>
-        </el-collapse-item>
-      </el-collapse>
+      <el-button @click="showTeamsStats">showTeamsStats</el-button>
+      <div>{{ teamsStats }}</div>
+<!--      <el-collapse @change="showTeamsStats">-->
+<!--        <el-collapse-item name="stats">-->
+<!--            <template #title>-->
+<!--              <div class="match-info__stats">-->
+<!--                <el-icon class="header-icon"><histogram /></el-icon>-->
+<!--                <span class="match-info__stats-title">show teams stats</span>-->
+<!--              </div>-->
+<!--            </template>-->
+<!--          <MatchTeamsStats v-loading="isLoadingTeamsStats" :teamsStats="teamsStats"/>-->
+<!--        </el-collapse-item>-->
+<!--      </el-collapse>-->
     </div>
     <div class="match-info__time">
       <div>
@@ -38,6 +40,7 @@ import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { DateTime, DateTimeFormatOptions } from 'luxon';
 import { Histogram } from '@element-plus/icons-vue';
+import { TeamsStats } from '@/common/types';
 import MatchTeam from './MatchTeam.vue';
 import MatchStatus from './MatchStatus.vue';
 import MatchReferee from './MatchReferee.vue';
@@ -65,14 +68,26 @@ const displayedDate = computed(() => {
 const teamsStats = computed(() => store.state.matches.teamsStats);
 const isLoadingTeamsStats = computed(() => store.state.matches.isLoading);
 
+const getCurrentStats = (arr: TeamsStats[], id: number) => arr.find((item) => item.matchId === id);
+
 const showTeamsStats = () => {
   if (props.match) {
-    isShowedTeamsStats.value = !isShowedTeamsStats.value;
-    if (isShowedTeamsStats.value) {
+    const isStatsInMatch = getCurrentStats(teamsStats.value, props.match.id);
+    if (!isStatsInMatch) {
       store.dispatch('fetchMatchTeamsStats', props.match.id);
     }
+    console.log(teamsStats.value);
   }
 };
+
+// const showTeamsStats = () => {
+//   if (props.match) {
+//     isShowedTeamsStats.value = !isShowedTeamsStats.value;
+//     if (isShowedTeamsStats.value) {
+//       store.dispatch('fetchMatchTeamsStats', props.match.id);
+//     }
+//   }
+// };
 </script>
 
 <style lang="scss">
