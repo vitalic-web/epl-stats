@@ -112,6 +112,7 @@ export interface MatchTeam {
 }
 
 export interface TeamsStats {
+  matchId: number;
   numberOfMatches: number;
   totalGoals: number;
   homeTeam: MatchTeam;
@@ -120,7 +121,7 @@ export interface TeamsStats {
 
 export interface Matches {
   allMatches: Match[];
-  teamsStats: TeamsStats;
+  teamsStats: TeamsStats[];
   isLoading: boolean;
 }
 

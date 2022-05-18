@@ -8,24 +8,7 @@ import EventService from '@/services/EventService';
 const teams: Module<Matches, RootState> = {
   state: () => ({
     allMatches: [],
-    teamsStats: {
-      numberOfMatches: 0,
-      totalGoals: 0,
-      homeTeam: {
-        id: 0,
-        name: '',
-        wins: 0,
-        draws: 0,
-        losses: 0,
-      },
-      awayTeam: {
-        id: 0,
-        name: '',
-        wins: 0,
-        draws: 0,
-        losses: 0,
-      },
-    },
+    teamsStats: [],
     isLoading: false,
   }),
   mutations: {
@@ -33,7 +16,7 @@ const teams: Module<Matches, RootState> = {
       state.allMatches = matchesData;
     },
     SET_TEAMS_STATS(state, teamsStatsData) {
-      state.teamsStats = teamsStatsData;
+      state.teamsStats.push(teamsStatsData);
     },
     SET_IS_LOADING(state, isLoadingStatus) {
       state.isLoading = isLoadingStatus;
@@ -62,8 +45,12 @@ const teams: Module<Matches, RootState> = {
     async fetchMatchTeamsStats({ commit }, id: number) {
       try {
         commit('SET_IS_LOADING', true);
-        const teamsStats = await EventService.getMatchTeamsStats(id);
-        commit('SET_TEAMS_STATS', teamsStats.data.head2head);
+        const teamsStatsData = await EventService.getMatchTeamsStats(id);
+        const teamsStats = {
+          matchId: teamsStatsData.data.match.id,
+          ...teamsStatsData.data.head2head,
+        };
+        commit('SET_TEAMS_STATS', teamsStats);
       } catch (error) {
         console.log('error');
       } finally {
