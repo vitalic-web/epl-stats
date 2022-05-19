@@ -122,6 +122,7 @@ export interface TeamsStats {
 export interface Matches {
   allMatches: Match[];
   teamsStats: TeamsStats[];
+  currentTeamsStats: TeamsStats;
   isLoading: boolean;
 }
 
