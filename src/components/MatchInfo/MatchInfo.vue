@@ -79,7 +79,7 @@ const showTeamsStats = () => {
   margin: 5px 0;
   border-radius: 5px;
   padding: 10px;
-  width: 450px;
+  width: 500px;
   &__teams-container {
     display: flex;
     flex-direction: column;
@@ -96,7 +96,7 @@ const showTeamsStats = () => {
     flex-direction: column;
     justify-content: center;
     border-left: 1px solid gray;
-    width: 25%;
+    width: 22%;
   }
   &__score {
     margin-right: 10px;
