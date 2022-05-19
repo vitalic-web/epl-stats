@@ -1,6 +1,7 @@
+/* eslint-disable no-param-reassign */
 import { Module } from 'vuex';
 import {
-  Matches, RootState, WeekDates, Match, TeamsStats,
+  Matches, RootState, WeekDates, Match,
 } from '@/common/types';
 import { getCrestUrl } from '@/common/utils';
 import EventService from '@/services/EventService';
@@ -9,25 +10,6 @@ const teams: Module<Matches, RootState> = {
   state: () => ({
     allMatches: [],
     teamsStats: [],
-    // currentTeamsStats: {
-    //   matchId: 0,
-    //   numberOfMatches: 0,
-    //   totalGoals: 0,
-    //   homeTeam: {
-    //     id: 0,
-    //     name: '',
-    //     wins: 0,
-    //     draws: 0,
-    //     losses: 0,
-    //   },
-    //   awayTeam: {
-    //     id: 0,
-    //     name: '',
-    //     wins: 0,
-    //     draws: 0,
-    //     losses: 0,
-    //   },
-    // },
     isLoading: false,
   }),
   getters: {
@@ -41,9 +23,6 @@ const teams: Module<Matches, RootState> = {
     SET_TEAMS_STATS(state, teamsStatsData) {
       state.teamsStats.push(teamsStatsData);
     },
-    // SET_CURRENT_TEAMS_STATS(state, teamsStatsData) {
-    //   state.teamsStats.push(teamsStatsData);
-    // },
     SET_IS_LOADING(state, isLoadingStatus) {
       state.isLoading = isLoadingStatus;
     },
@@ -56,9 +35,7 @@ const teams: Module<Matches, RootState> = {
 
         matches.data.matches
           .map(async (match: Match) => {
-            // eslint-disable-next-line no-param-reassign
             match.homeTeam.crestUrl = getCrestUrl(match.homeTeam.id);
-            // eslint-disable-next-line no-param-reassign
             match.awayTeam.crestUrl = getCrestUrl(match.awayTeam.id);
           });
         commit('SET_MATCHES', matches.data.matches);
