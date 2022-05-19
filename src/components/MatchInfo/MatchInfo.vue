@@ -11,19 +11,17 @@
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
       <MatchReferee :referee="match.referees.length ? match.referees[0].name : null" />
-      <el-button @click="showTeamsStats">showTeamsStats</el-button>
-      <div>{{ teamsStats }}</div>
-<!--      <el-collapse @change="showTeamsStats">-->
-<!--        <el-collapse-item name="stats">-->
-<!--            <template #title>-->
-<!--              <div class="match-info__stats">-->
-<!--                <el-icon class="header-icon"><histogram /></el-icon>-->
-<!--                <span class="match-info__stats-title">show teams stats</span>-->
-<!--              </div>-->
-<!--            </template>-->
-<!--          <MatchTeamsStats v-loading="isLoadingTeamsStats" :teamsStats="teamsStats"/>-->
-<!--        </el-collapse-item>-->
-<!--      </el-collapse>-->
+      <el-collapse @change="showTeamsStats">
+        <el-collapse-item name="stats">
+            <template #title>
+              <div class="match-info__stats">
+                <el-icon class="header-icon"><histogram /></el-icon>
+                <span class="match-info__stats-title">show teams stats</span>
+              </div>
+            </template>
+          <MatchTeamsStats v-if="currentTeamsStats" :teamsStats="currentTeamsStats" />
+        </el-collapse-item>
+      </el-collapse>
     </div>
     <div class="match-info__time">
       <div>
@@ -36,11 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { DateTime, DateTimeFormatOptions } from 'luxon';
 import { Histogram } from '@element-plus/icons-vue';
-import { TeamsStats } from '@/common/types';
 import MatchTeam from './MatchTeam.vue';
 import MatchStatus from './MatchStatus.vue';
 import MatchReferee from './MatchReferee.vue';
@@ -51,8 +48,6 @@ const props = defineProps({
 });
 
 const store = useStore();
-
-const isShowedTeamsStats = ref(false);
 
 const dt = DateTime.fromISO(props.match && props.match.utcDate).setLocale('en-US');
 const currentDate = DateTime.now().setLocale('en-US');
@@ -65,29 +60,16 @@ const displayedDate = computed(() => {
   return dt.toLocaleString(format);
 });
 
-const teamsStats = computed(() => store.state.matches.teamsStats);
-const isLoadingTeamsStats = computed(() => store.state.matches.isLoading);
-
-const getCurrentStats = (arr: TeamsStats[], id: number) => arr.find((item) => item.matchId === id);
+// TODO: fix to composition modules: match and match stats
+const currentTeamsStats = computed(() => store.getters.currentTeamsStats(
+  props.match && props.match.id,
+));
 
 const showTeamsStats = () => {
-  if (props.match) {
-    const isStatsInMatch = getCurrentStats(teamsStats.value, props.match.id);
-    if (!isStatsInMatch) {
-      store.dispatch('fetchMatchTeamsStats', props.match.id);
-    }
-    console.log(teamsStats.value);
+  if (!currentTeamsStats.value) {
+    store.dispatch('fetchMatchTeamsStats', props.match && props.match.id);
   }
 };
-
-// const showTeamsStats = () => {
-//   if (props.match) {
-//     isShowedTeamsStats.value = !isShowedTeamsStats.value;
-//     if (isShowedTeamsStats.value) {
-//       store.dispatch('fetchMatchTeamsStats', props.match.id);
-//     }
-//   }
-// };
 </script>
 
 <style lang="scss">
