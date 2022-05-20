@@ -30,28 +30,26 @@
 
 <style lang="scss">
 .footer {
-  width: 100%;
+  width: 95%;
   margin-top: auto;
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid black;
+  border-top: 1px solid gray;
+  &__name {
+    display: flex;
+    align-items: center;
+  }
   &__logo {
     width: 20px;
     height: 20px;
     margin-right: 5px;
-  }
-  &__name {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
   }
   &__copy-right {
     font-size: 24px;
     margin-right: 5px;
   }
   &__author {
-    padding-right: 10px;
     display: flex;
     align-items: center;
   }
