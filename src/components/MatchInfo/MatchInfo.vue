@@ -11,7 +11,7 @@
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
       <MatchReferee :referee="match.referees.length ? match.referees[0].name : null" />
-      <el-collapse @change="showTeamsStats">
+      <el-collapse v-loading="loadingTeamsStats" @change="showTeamsStats">
         <el-collapse-item name="stats">
             <template #title>
               <div class="match-info__stats">
@@ -47,7 +47,9 @@ const props = defineProps({
 });
 
 const { isToday, displayedTime, displayedDate } = useDates(props.match && props.match.utcDate);
-const { currentTeamsStats, showTeamsStats } = useTeamsStats(props.match && props.match.id);
+const {
+  currentTeamsStats, showTeamsStats, loadingTeamsStats,
+} = useTeamsStats(props.match && props.match.id);
 </script>
 
 <style lang="scss">

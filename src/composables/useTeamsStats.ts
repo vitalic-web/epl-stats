@@ -4,6 +4,7 @@ import { useStore } from 'vuex';
 export default function useTeamsStats(matchId: number) {
   const store = useStore();
   const currentTeamsStats = computed(() => store.getters.currentTeamsStats(matchId));
+  const loadingTeamsStats = computed(() => store.state.matches.isLoading);
 
   const showTeamsStats = () => {
     if (!currentTeamsStats.value) {
@@ -12,6 +13,6 @@ export default function useTeamsStats(matchId: number) {
   };
 
   return {
-    currentTeamsStats, showTeamsStats,
+    currentTeamsStats, showTeamsStats, loadingTeamsStats,
   };
 }
