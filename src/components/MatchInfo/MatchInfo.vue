@@ -34,10 +34,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-import { DateTime, DateTimeFormatOptions } from 'luxon';
 import { Histogram } from '@element-plus/icons-vue';
+import useDates from '@/composables/useDates';
+import useTeamsStats from '@/composables/useTeamsStats';
 import MatchTeam from './MatchTeam.vue';
 import MatchStatus from './MatchStatus.vue';
 import MatchReferee from './MatchReferee.vue';
@@ -47,29 +46,8 @@ const props = defineProps({
   match: Object,
 });
 
-const store = useStore();
-
-const dt = DateTime.fromISO(props.match && props.match.utcDate).setLocale('en-US');
-const currentDate = DateTime.now().setLocale('en-US');
-
-const isToday = computed(() => (dt.day === currentDate.day) && (dt.month === currentDate.month));
-const displayedTime = computed(() => dt.toFormat('T'));
-
-const displayedDate = computed(() => {
-  const format: DateTimeFormatOptions = { month: 'long', day: 'numeric' };
-  return dt.toLocaleString(format);
-});
-
-// TODO: fix to composition modules: match and match stats
-const currentTeamsStats = computed(() => store.getters.currentTeamsStats(
-  props.match && props.match.id,
-));
-
-const showTeamsStats = () => {
-  if (!currentTeamsStats.value) {
-    store.dispatch('fetchMatchTeamsStats', props.match && props.match.id);
-  }
-};
+const { isToday, displayedTime, displayedDate } = useDates(props.match && props.match.utcDate);
+const { currentTeamsStats, showTeamsStats } = useTeamsStats(props.match && props.match.id);
 </script>
 
 <style lang="scss">
