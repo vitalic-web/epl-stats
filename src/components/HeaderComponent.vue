@@ -1,7 +1,7 @@
 <template>
-  <el-header>
-    <p style="margin: 0">{{ name }}</p>
-  </el-header>
+  <header>
+    <p>{{ name }}</p>
+  </header>
 </template>
 
 <script setup lang="ts">

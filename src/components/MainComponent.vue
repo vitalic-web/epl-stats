@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <main>
     <div class="main">
       <PageLink name="Teams" routeName="teams" />
       <PageLink name="Table" routeName="table" />
@@ -7,7 +7,7 @@
       <PageLink name="Winners" routeName="winners" />
       <PageLink name="Matches" routeName="matches" :query="weekDates" />
     </div>
-  </el-main>
+  </main>
 </template>
 
 <script setup lang="ts">
