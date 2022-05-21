@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { Teams, RootState } from '@/common/types';
+import { Teams, RootState, Team } from '@/common/types';
 import EventService from '@/services/EventService';
 
 const teams: Module<Teams, RootState> = {
@@ -21,6 +21,19 @@ const teams: Module<Teams, RootState> = {
       },
     },
   }),
+  getters: {
+    teamsLogos(state): Team[] {
+      const teamsLogosData: Team[] = [];
+      state.allTeams.forEach((team: Team) => {
+        teamsLogosData.push({
+          id: team.id,
+          name: team.name,
+          crestUrl: team.crestUrl,
+        });
+      });
+      return teamsLogosData;
+    },
+  },
   mutations: {
     SET_ALL_TEAMS(state, teamsData) {
       state.allTeams = teamsData;
