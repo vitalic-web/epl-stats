@@ -12,7 +12,7 @@
       <span class="footer__copy-right">&#169;</span>
       <span>vitalic-web</span>
       <div class="footer__github">
-        <img class="footer__github-logo" src="../assets/GitHub-logo.png" alt="GitHub logo">
+        <img class="footer__github-logo" src="../assets/github-logo.png" alt="GitHub logo">
         <a
           class="footer__github-link"
           href="https://github.com/vitalic-web"
