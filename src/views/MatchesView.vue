@@ -76,11 +76,9 @@ apiCallFromDates();
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   &__margin {
     margin-bottom: 20px;
-  }
-  &__breadcrumb {
-    align-self: flex-start;
   }
 }
 </style>

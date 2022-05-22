@@ -20,6 +20,7 @@ const weekDates = getCurrentWeekDates();
   display: grid;
   grid-gap: 5px;
   grid-template-columns: 300px 300px 300px;
+  margin-top: 30px;
   &__element {
     margin: 0 20px;
   }

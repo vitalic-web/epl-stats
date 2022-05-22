@@ -1,5 +1,4 @@
 <template>
-<!--  TODO: fix styles-->
   <header class="header">
     <img
       class="header__epl-logo"
@@ -35,7 +34,6 @@ store.dispatch('fetchTeams').then(() => {
   align-items: center;
   justify-content: space-between;
   width: 95%;
-  margin-bottom: 50px;
   border-bottom: 1px solid black;
   padding: 15px 0;
   &__epl-logo {
