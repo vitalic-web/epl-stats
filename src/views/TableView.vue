@@ -7,6 +7,7 @@
     :data="standings"
     style="width: 100%"
     :row-class-name="tableRowClassName"
+    class="table-view"
   >
     <el-table-column label="Position" width="80">
       <template #default="scope">
@@ -116,7 +117,7 @@ store.dispatch('fetchTable');
 </script>
 
 <style lang="scss">
-.el-table th.el-table__cell>.cell {
+.table-view.el-table th.el-table__cell>.cell {
   display: flex;
   justify-content: center;
 }

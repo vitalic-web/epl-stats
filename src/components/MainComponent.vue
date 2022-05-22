@@ -1,12 +1,10 @@
 <template>
-  <main>
-    <div class="main">
-      <PageLink name="Teams" routeName="teams" />
-      <PageLink name="Table" routeName="table" />
-      <PageLink name="Scorers" routeName="scorers" />
-      <PageLink name="Winners" routeName="winners" />
-      <PageLink name="Matches" routeName="matches" :query="weekDates" />
-    </div>
+  <main class="main">
+    <PageLink name="Teams" routeName="teams" />
+    <PageLink name="Table" routeName="table" />
+    <PageLink name="Scorers" routeName="scorers" />
+    <PageLink name="Winners" routeName="winners" />
+    <PageLink name="Matches" routeName="matches" :query="weekDates" />
   </main>
 </template>
 
