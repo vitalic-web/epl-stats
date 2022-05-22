@@ -1,7 +1,7 @@
 <template>
   <breadcrumb-nav />
   <h3>Winners</h3>
-  <el-row v-loading="isLoading">
+  <el-row class="winners-container" v-loading="isLoading">
     <el-col
       v-for="winner in winners"
       :key="winner.id"
@@ -35,6 +35,10 @@ store.dispatch('fetchWinners');
 </script>
 
 <style lang="scss">
+.winners-container {
+  width: 95%;
+}
+
 .winner__logo {
   width: 150px;
   height: 150px;

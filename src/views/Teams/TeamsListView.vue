@@ -1,7 +1,7 @@
 <template>
   <breadcrumb-nav />
   <h3>Teams</h3>
-  <el-row v-loading="isLoading">
+  <el-row class="teams-container" v-loading="isLoading">
     <el-col
       v-for="team in teams"
       :key="team.id"
@@ -47,12 +47,14 @@ store.dispatch('fetchTeams');
 </script>
 
 <style lang="scss">
-.team {
-  &__logo {
-    width: 200px;
-    height: 200px;
-    margin-top: 20px;
-  }
+.teams-container {
+  width: 95%;
+}
+
+.team__logo {
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
 }
 
 .icon {

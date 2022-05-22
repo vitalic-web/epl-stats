@@ -4,7 +4,7 @@
   <el-table
     v-loading="isLoading"
     :data="scorers"
-    style="width: 100%"
+    style="width: 95%"
     :row-class-name="tableRowClassName"
   >
     <el-table-column label="Rank" width="80">

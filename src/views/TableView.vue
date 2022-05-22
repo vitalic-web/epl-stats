@@ -5,7 +5,7 @@
   <el-table
     v-loading="isLoading"
     :data="standings"
-    style="width: 100%"
+    style="width: 95%"
     :row-class-name="tableRowClassName"
     class="table-view"
   >
