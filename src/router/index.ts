@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/teams',
     name: 'teams',
-    component: () => import('../views/TeamsListView.vue'),
+    component: () => import('../views/Teams/TeamsListView.vue'),
     // TODO: fix children routes, add <router-view></router-view> in parent
   },
   {
@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
       baseUrl: '/teams',
       baseUrlName: 'teams',
     },
-    component: () => import('../views/TeamInfoView.vue'),
+    component: () => import('../views/Teams/TeamInfoView.vue'),
   },
   {
     path: '/table',
