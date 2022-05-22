@@ -3,7 +3,7 @@
   <header class="header">
     <img
       class="header__epl-logo"
-      src="../assets/epl-logo-text.png"
+      src="../assets/epl-logo-text2.png"
       alt="English Premier League Logo with text"
     >
     <div class="header__logos-container">
@@ -32,11 +32,14 @@ store.dispatch('fetchTeams').then(() => {
 <style lang="scss">
 .header {
   display: flex;
-  width: 100%;
   align-items: center;
+  justify-content: space-between;
+  width: 95%;
   margin-bottom: 50px;
+  border-bottom: 1px solid black;
+  padding: 15px 0;
   &__epl-logo {
-    height: 120px;
+    height: 45px;
   }
   &__logos-container {
     display: grid;
@@ -44,7 +47,7 @@ store.dispatch('fetchTeams').then(() => {
     grid-template-columns: repeat(20, 1fr);
   }
   &__club-logo {
-    width: 43px;
+    width: 38px;
   }
 }
 </style>
