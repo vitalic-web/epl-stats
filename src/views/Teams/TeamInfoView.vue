@@ -2,8 +2,7 @@
   <breadcrumb-nav :name="selectedTeam.name" />
   <div class="team-info" v-loading="isLoading">
     <h3>{{ selectedTeam.name }}</h3>
-<!--TODO: fix FAILED text on image when it loading    -->
-    <el-image style="width: 200px; height: 200px" :src="selectedTeam.crestUrl" fit="contain" />
+    <img class="team-info__img" :src="selectedTeam.crestUrl" :alt="`${selectedTeam.name} image`">
     <el-descriptions
       title="Information"
       direction="vertical"
@@ -72,6 +71,12 @@ store.dispatch('fetchTeamInfo', route.params.id);
 <style lang="scss">
 .team-info {
   width: 95%;
+  padding-bottom: 10px;
+  &__img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+  }
   &__squad-title {
     text-align: start;
     margin: 30px 0 5px;
