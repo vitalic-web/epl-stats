@@ -1,31 +1,25 @@
 <template>
   <breadcrumb-nav />
   <h3>Teams</h3>
-  <el-row class="teams-container" v-loading="isLoading">
-    <el-col
-      v-for="team in teams"
-      :key="team.id"
-      :span="8"
-    >
-      <el-card :body-style="{ padding: '0px' }">
-        <img
-          :alt="`${team.name} logo`"
-          :src="team.crestUrl"
-          class="team__logo"
-        />
-        <div style="padding: 14px">
-          <span>{{ team.name }}</span>
-          <div class="bottom">
-            <el-button
-              type="text"
-              class="button"
-              @click="getTeamInfo(team.id)"
-            >More info</el-button>
-          </div>
+  <div class="teams-container" v-loading="isLoading">
+    <el-card v-for="team in teams" :key="team.id" :body-style="{ padding: '0px' }">
+      <img
+        :alt="`${team.name} logo`"
+        :src="team.crestUrl"
+        class="team__logo"
+      />
+      <div style="padding: 14px">
+        <span>{{ team.name }}</span>
+        <div class="bottom">
+          <el-button
+            type="text"
+            class="button"
+            @click="getTeamInfo(team.id)"
+          >More info</el-button>
         </div>
-      </el-card>
-    </el-col>
-  </el-row>
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -49,6 +43,10 @@ store.dispatch('fetchTeams');
 <style lang="scss">
 .teams-container {
   width: 95%;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  padding-bottom: 10px;
 }
 
 .team__logo {

@@ -13,8 +13,8 @@
       @change="pickDates"
     />
     <el-button class="matches__margin" type="primary" @click="clear">current week</el-button>
-    <div v-loading="isLoading" v-for="match in matches" :key="match.id">
-      <MatchInfo :match="match" />
+    <div class="matches__list" v-loading="isLoading">
+      <MatchInfo v-for="match in matches" :key="match.id" :match="match" />
     </div>
   </div>
 </template>
@@ -79,6 +79,12 @@ apiCallFromDates();
   width: 100%;
   &__margin {
     margin-bottom: 20px;
+  }
+  &__list {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 15px;
   }
 }
 </style>
