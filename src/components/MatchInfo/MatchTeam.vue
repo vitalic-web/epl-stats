@@ -19,6 +19,8 @@ defineProps({
   width: 100%;
   &__img {
     width: 50px;
+    height: 50px;
+    object-fit: contain;
   }
   &__name {
     margin-left: 10px;
