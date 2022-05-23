@@ -11,7 +11,11 @@
         <div class="match-info__score">{{ match.score.fullTime.awayTeam }}</div>
       </div>
       <MatchReferee :referee="match.referees.length ? match.referees[0].name : null" />
-      <el-collapse v-loading="loadingTeamsStats" @change="showTeamsStats">
+      <el-collapse
+        class="match-info__collapse"
+        v-loading="loadingTeamsStats"
+        @change="showTeamsStats"
+      >
         <el-collapse-item name="stats">
             <template #title>
               <div class="match-info__stats">
@@ -56,7 +60,6 @@ const {
 .match-info {
   border: 1px solid gray;
   display: flex;
-  margin: 5px 0;
   border-radius: 5px;
   padding: 10px;
   width: 500px;
@@ -67,6 +70,7 @@ const {
   }
   &__team {
     display: flex;
+    padding-right: 12px;
   }
   &__home-team {
     margin-bottom: 10px;
@@ -79,7 +83,6 @@ const {
     width: 22%;
   }
   &__score {
-    margin-right: 10px;
     align-self: center;
     font-size: 20px;
     font-weight: bold;
@@ -90,6 +93,9 @@ const {
     &-title {
       margin-left: 5px;
     }
+  }
+  &__collapse {
+    width: 97%;
   }
 }
 
