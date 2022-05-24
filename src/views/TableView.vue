@@ -121,4 +121,12 @@ store.dispatch('fetchTable');
   display: flex;
   justify-content: center;
 }
+
+.el-table {
+  overflow: auto;
+}
+
+.table-view {
+  margin-bottom: 10px;
+}
 </style>
