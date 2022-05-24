@@ -1,6 +1,6 @@
 <template>
   <breadcrumb-nav :name="selectedTeam.name" />
-  <div class="team-info" v-loading="isLoading">
+  <div id="team-info" class="team-info" v-loading="isLoading">
     <h3>{{ selectedTeam.name }}</h3>
     <img class="team-info__img" :src="selectedTeam.crestUrl" :alt="`${selectedTeam.name} image`">
     <el-descriptions
@@ -80,6 +80,11 @@ store.dispatch('fetchTeamInfo', route.params.id);
   &__squad-title {
     text-align: start;
     margin: 30px 0 5px;
+  }
+}
+#team-info {
+  .el-table .cell {
+    padding: 0;
   }
 }
 </style>
