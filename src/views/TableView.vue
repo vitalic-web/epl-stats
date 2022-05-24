@@ -105,10 +105,14 @@ const tableRowClassName = ({
   row: StandingInfo;
   rowIndex: number;
 }) => {
-  if (rowIndex === 0) {
-    return 'success-row';
-  } if (rowIndex === 4) {
-    return 'warning-row';
+  if (rowIndex < 4) {
+    return 'champions-league';
+  } if (rowIndex <= 5) {
+    return 'europe-league';
+  } if (rowIndex === 6) {
+    return 'conference-league';
+  } if (rowIndex > 16) {
+    return 'championship';
   }
   return '';
 };

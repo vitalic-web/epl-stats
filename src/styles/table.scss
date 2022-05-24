@@ -13,9 +13,18 @@
   }
 }
 
-.el-table .warning-row {
+.el-table .champions-league {
+  --el-table-tr-bg-color: var(--el-color-success-light-9);
+}
+
+.el-table .europe-league {
+  --el-table-tr-bg-color: var(--el-color-primary-light-9);
+}
+
+.el-table .conference-league {
   --el-table-tr-bg-color: var(--el-color-warning-light-9);
 }
-.el-table .success-row {
-  --el-table-tr-bg-color: var(--el-color-success-light-9);
+
+.el-table .championship {
+  --el-table-tr-bg-color: var(--el-color-error-light-9);
 }
