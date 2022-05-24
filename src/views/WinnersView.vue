@@ -1,25 +1,19 @@
 <template>
   <breadcrumb-nav />
   <h3>Winners</h3>
-  <el-row class="winners-container" v-loading="isLoading">
-    <el-col
-      v-for="winner in winners"
-      :key="winner.id"
-      :span="6"
-    >
-      <el-card :body-style="{ padding: '0px' }">
-        <img v-if="winner.winner"
-          :alt="`${winner.winner.name} logo`"
-          :src="winner.winner.crestUrl"
-          class="winner__logo"
-        />
-        <div style="padding: 14px">
-          <span>{{ winner.winner ? winner.winner.name : 'No winner' }}</span>
-          <div class="bottom">{{ winner.years }}</div>
-        </div>
-      </el-card>
-    </el-col>
-  </el-row>
+  <div class="winners-container" v-loading="isLoading">
+    <el-card v-for="winner in winners" :key="winner.id" :body-style="{ padding: '0px' }">
+      <img v-if="winner.winner"
+        :alt="`${winner.winner.name} logo`"
+        :src="winner.winner.crestUrl"
+        class="winner__logo"
+      />
+      <div style="padding: 14px">
+        <span>{{ winner.winner ? winner.winner.name : 'No winner' }}</span>
+        <div class="bottom">{{ winner.years }}</div>
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -37,6 +31,10 @@ store.dispatch('fetchWinners');
 <style lang="scss">
 .winners-container {
   width: 95%;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  padding-bottom: 10px;
 }
 
 .winner__logo {
