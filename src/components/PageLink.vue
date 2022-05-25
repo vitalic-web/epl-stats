@@ -1,6 +1,7 @@
 <template>
 <!--  eslint-disable-next-line-->
   <div class="link" @click="getInfo">
+    <slot></slot>
     <h3>{{ name }}</h3>
   </div>
 </template>
@@ -24,9 +25,10 @@ const getInfo = () => router.push({ name: props.routeName, query: props.query })
   border: 1px solid black;
   background-color: aliceblue;
   border-radius: 5px;
-    &:hover {
-      cursor: pointer;
-      opacity: 0.8;
-    }
+  display: flex;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
 }
 </style>
