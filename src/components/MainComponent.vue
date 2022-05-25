@@ -4,7 +4,9 @@
       <img class="main__img" src="../assets/top6.png" alt="teams">
     </PageLink>
 <!--    <PageLink name="Table" route-name="table" />-->
-<!--    <PageLink name="Scorers" route-name="scorers" />-->
+    <PageLink name="Scorers" route-name="scorers">
+      <img class="main__img" src="../assets/epl-scorers.jpeg" alt="scorers">
+    </PageLink>
 <!--    <PageLink name="Winners" route-name="winners" />-->
 <!--    <PageLink name="Matches" route-name="matches" :query="weekDates" />-->
   </main>
