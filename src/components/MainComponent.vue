@@ -1,10 +1,12 @@
 <template>
   <main class="main">
-    <PageLink name="Teams" routeName="teams" />
-    <PageLink name="Table" routeName="table" />
-    <PageLink name="Scorers" routeName="scorers" />
-    <PageLink name="Winners" routeName="winners" />
-    <PageLink name="Matches" routeName="matches" :query="weekDates" />
+    <PageLink name="Teams" route-name="teams" img-path="src/assets/top6.png">
+      <img class="main__img" src="../assets/top6.png" alt="teams">
+    </PageLink>
+<!--    <PageLink name="Table" route-name="table" />-->
+<!--    <PageLink name="Scorers" route-name="scorers" />-->
+<!--    <PageLink name="Winners" route-name="winners" />-->
+<!--    <PageLink name="Matches" route-name="matches" :query="weekDates" />-->
   </main>
 </template>
 
@@ -17,12 +19,13 @@ const weekDates = getCurrentWeekDates();
 
 <style lang="scss">
 .main {
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: 300px 300px 300px;
+  display: flex;
+  flex-direction: column;
   margin-top: 30px;
-  &__element {
-    margin: 0 20px;
+  width: 95%;
+  &__img {
+    height: 300px;
+    object-fit: contain;
   }
 }
 </style>
