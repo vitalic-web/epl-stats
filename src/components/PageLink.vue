@@ -34,7 +34,7 @@ const getInfo = () => router.push({ name: props.routeName, query: props.query })
   }
   &__name {
     margin-right: 15px;
-    font-size: 50px;
+    font-size: 40px;
   }
 }
 </style>
