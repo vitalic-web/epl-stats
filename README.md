@@ -1,24 +1,11 @@
-# epl-stats
+# Epl Stats
 
-## Project setup
+## About project.
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+English Premier League info and statistics.
 ```
 
-### Compiles and minifies for production
+### Used technologies
 ```
-npm run build
+JavaScript, TypeScript, Vue3 (composition api), Vuex, Sass
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
