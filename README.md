@@ -1,6 +1,6 @@
 # Epl Stats
 
-## About project.
+## About project
 ```
 English Premier League info and statistics.
 ```
