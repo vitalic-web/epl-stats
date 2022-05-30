@@ -1,10 +1,12 @@
 <template>
   <header class="header">
-    <img
-      class="header__epl-logo"
-      src="../assets/epl-logo-text2.png"
-      alt="English Premier League Logo with text"
-    >
+    <router-link to="/">
+      <img
+        class="header__epl-logo"
+        src="../assets/epl-logo-text2.png"
+        alt="English Premier League Logo with text"
+      >
+    </router-link>
     <div class="header__logos-container">
       <img
         class="header__club-logo"
