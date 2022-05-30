@@ -23,7 +23,7 @@ const getInfo = () => router.push({ name: props.routeName, query: props.query })
 <style lang="scss">
 .link {
   border: 1px solid black;
-  background-color: aliceblue;
+  background-color: floralwhite;
   border-radius: 5px;
   display: flex;
   align-items: center;
