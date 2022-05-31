@@ -43,13 +43,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, toRefs, watch } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import { DateTime } from 'luxon';
 
 const store = useStore();
 const route = useRoute();
+const routeRef = toRefs(route);
 
 const selectedTeam = computed(() => store.state.teams.selectedTeam);
 const isLoading = computed(() => store.getters.isLoading);
@@ -64,6 +65,10 @@ const getYears = (date: string) => {
   const end = DateTime.now();
   return Math.floor(end.diff(start, 'years').years);
 };
+
+watch(routeRef.params, () => {
+  store.dispatch('fetchTeamInfo', route.params.id);
+});
 
 store.dispatch('fetchTeamInfo', route.params.id);
 </script>

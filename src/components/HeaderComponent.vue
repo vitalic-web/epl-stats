@@ -1,5 +1,7 @@
 <template>
+  <!--  eslint-disable  -->
   <header class="header">
+<!--    TODO: fix bug call api on click to main from tem info -->
     <router-link to="/">
       <img
         class="header__epl-logo"
@@ -13,6 +15,7 @@
         v-for="(club) in teamsLogosData"
         :key="club.id" :src="club.crestUrl"
         :alt="`${club.name} logo`"
+        @click="getTeamInfo(club.id)"
       >
     </div>
   </header>
@@ -21,9 +24,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 const store = useStore();
+const router = useRouter();
 const teamsLogosData = ref([]);
+
+const getTeamInfo = (teamId: string) => {
+  router.push({ name: 'team', params: { id: teamId } });
+};
 
 store.dispatch('fetchTeams').then(() => {
   teamsLogosData.value = store.getters.teamsLogos;
