@@ -1,7 +1,6 @@
 <template>
   <!--  eslint-disable  -->
   <header class="header">
-<!--    TODO: fix bug call api on click to main from tem info -->
     <router-link to="/">
       <img
         class="header__epl-logo"

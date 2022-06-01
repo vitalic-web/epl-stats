@@ -67,7 +67,9 @@ const getYears = (date: string) => {
 };
 
 watch(routeRef.params, () => {
-  store.dispatch('fetchTeamInfo', route.params.id);
+  if (routeRef.params.value.id) {
+    store.dispatch('fetchTeamInfo', route.params.id);
+  }
 });
 
 store.dispatch('fetchTeamInfo', route.params.id);
